@@ -1,0 +1,19 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+
+<form action="#" method="post">
+
+    {{ form_errors(form) }}
+    
+    {{ form_errors(form.paste) }}
+    {{ form_widget(form.paste) }}
+
+    {{ form_widget(form._token) }}
+
+    <p class="right">
+        <button class="button-main" type="submit">Paste It</button>
+    </p>
+
+</form>
+{% endblock %}

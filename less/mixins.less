@@ -1,0 +1,48 @@
+#gradients {
+  .horizontal(@startColor, @endColor) {
+    background-color: @endColor;
+    background-image: -moz-linear-gradient(left, @startColor, @endColor); // FF 3.6+
+    background-image: -ms-linear-gradient(left, @startColor, @endColor); // IE10
+    background-image: -webkit-gradient(linear, 0 0, 100% 0, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+    background-image: -webkit-linear-gradient(left, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+    background-image: -o-linear-gradient(left, @startColor, @endColor); // Opera 11.10
+    background-image: linear-gradient(left, @startColor, @endColor); // The standard
+    background-repeat: repeat-x;
+  }
+
+  .vertical(@startColor, @endColor) {
+    background-color: @endColor;
+    background-image: -moz-linear-gradient(top center, @startColor, @endColor); // FF 3.6+
+    background-image: -ms-linear-gradient(top center, @startColor, @endColor); // IE10
+    background-image: -webkit-gradient(linear, 0 0, 100% 0, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+    background-image: -webkit-linear-gradient(top center, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+    background-image: -o-linear-gradient(top center, @startColor, @endColor); // Opera 11.10
+    background-image: linear-gradient(top center, @startColor, @endColor); // The standard
+    background-repeat: repeat-x;
+  }
+}
+
+// Interface
+.greenGradientBar {
+  #gradients > .vertical(#9de691, #70db64);
+  background-color: #9de691;
+  border: 1px solid #8bc384;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6);
+  font-weight: bold;
+  color: @darkGray;
+  font-size: 12px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.grayGradientBar {
+  #gradients > .vertical(#b7b7b7, #949494);
+  background-color: #b7b7b7;
+  border: 1px solid #888;
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  color: @white;
+  font-size: 12px;
+  padding: 10px;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,139 @@
+@import "variables.less";
+@import "mixins.less";
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #eee;
+}
+
+textarea {
+  width: 100%;
+  height: 400px;
+  font-family: monospace;
+}
+
+pre {
+  margin: 0;
+}
+
+pre code {
+  white-space: pre;
+  overflow: auto;
+  font-family: "Menlo", monospace;
+  font-size: 14px;
+}
+
+#top-bar {
+  background-color: #444;
+  color: #d5d5d5;
+  padding: 15px 10px;
+  overflow: hidden;
+}
+
+#top-bar #logo {
+  float: left;
+}
+
+#top-bar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#top-bar #logo a {
+  color: #b1d631;
+  font-size: 24px;
+}
+
+
+#navigation {
+  float: right;
+  margin: 0;
+
+  li {
+    border-right: 1px dotted #fff;
+    padding: 2px 15px;
+    list-style: none;
+    float: left;
+
+    a {
+      color: #ccc;
+    }
+
+    a:hover {
+      color: #fff;
+    }
+  }
+
+  li:last-child {
+    border-right: none;
+  }
+}
+
+#content {
+  padding: 10px;
+}
+
+.right {
+  float: right;
+}
+
+.button, button {
+  #gradients > .horizontal(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));
+  display: inline-block;
+  border: 1px solid #487310;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  background: #f5f5f5;
+  padding: 0.4em 1em;
+  font-size: 18px;
+}
+
+button:hover,
+button:focus,
+button:active {
+    text-decoration: none;
+    border-color: #c6c6c6;
+    color: #333;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    background-color: #f8f8f8;
+}
+
+button:focus {
+    border-color: #105cb6;
+    outline: 0;
+}
+
+button:active {
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    background-color: #eee;
+}
+
+.button-main {
+    border-color: #5e9612;
+    color: #fff;
+    background-color: #69a619;
+}
+
+.button-main:hover,
+.button-main:focus,
+.button-main:active {
+    border-color: #558713;
+    color: #fff;
+    background-color: #6ead1a;
+}
+
+.button-main:active {
+    background-color: #5D9117;
+}
+
+.error {
+  background: @errorRed;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px;
+  color: @white;
+  margin: 0;
+  border-radius: 4px;
+}

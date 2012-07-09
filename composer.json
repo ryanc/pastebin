@@ -1,0 +1,19 @@
+{
+    "require": {
+        "silex/silex": "1.0.*",
+        "doctrine/orm": "2.2.2",
+        "twig/twig": ">= 1.8. < 2.0-dev",
+        "symfony/form": "2.1.*",
+        "symfony/twig-bridge": "2.1.*",
+        "symfony/validator": "2.1.*",
+        "symfony/config": "2.1.*",
+        "symfony/translation": "2.1.*",
+        "monolog/monolog": ">=1.0.0"
+    },
+    "require-dev": {
+        "phing/phing": "2.4.*"
+    },
+    "autoload": {
+        "psr-0": { "Paste": "src/" }
+    }
+}
