@@ -3,7 +3,7 @@
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #eee;
+  // background-color: #eee;
 }
 
 textarea {
@@ -141,4 +141,26 @@ button:active {
 #form_filename {
   margin-right: 10px;
   width: 300px;
+}
+
+#pasteOptions {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  margin: 0;
+  
+  li {
+    float: left;
+    padding: 0 5px;
+    list-style: none;
+
+    a {
+      display: inline-block;
+      color: #4183c4;
+      text-decoration: none;
+      border-radius: 8px;
+      background-color: #f2f2f2;
+      padding: 5px;
+    }
+  }
 }
