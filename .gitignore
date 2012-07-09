@@ -1,0 +1,6 @@
+cache/*
+db/*
+logs/*.log
+vendor/*
+composer.lock
+composer.phar*
