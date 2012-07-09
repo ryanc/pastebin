@@ -12,11 +12,14 @@ $app = new Silex\Application;
 require __DIR__ . '/bootstrap.php';
 
 $app->get('/p/new', function () use ($app) {
-    $data = array();
+    $paste = array();
 
-    $form = $app['form.factory']->createBuilder('form', $data)
+    $form = $app['form.factory']->createBuilder('form', $paste)
         ->add('paste', 'textarea', array(
             'constraints' => new Assert\NotBlank,
+        ))
+        ->add('filename', 'text', array(
+            'required' => false,
         ))
         ->getForm();
     ;
@@ -32,11 +35,14 @@ $app->get('/p/new', function () use ($app) {
 
 $app->post('/p/new', function(Request $request) use ($app) {
 
-    $data = array();
+    $paste = array();
 
-    $form = $app['form.factory']->createBuilder('form', $data)
+    $form = $app['form.factory']->createBuilder('form', $paste)
         ->add('paste', 'textarea', array(
             'constraints' => new Assert\NotBlank,
+        ))
+        ->add('filename', 'text', array(
+            'required' => false,
         ))
         ->getForm();
     ;
@@ -44,9 +50,9 @@ $app->post('/p/new', function(Request $request) use ($app) {
     $form->bindRequest($request);
 
     if ($form->isValid()) {
-        $data = $form->getData();
+        $paste = $form->getData();
 
-        $id = $app['storage']->save($data['paste']);
+        $id = $app['storage']->save($paste);
 
         return new RedirectResponse('/p/' . $id);
     }
@@ -86,7 +92,9 @@ $app->get('/p/{id}/raw', function($id) use ($app) {
 $app->get('/p/{id}/download', function($id) use ($app) {
     $paste = $app['storage']->get($id);
 
-    $filename = 'paste-' . $id . '.txt';
+    if (null == $filename = $paste['filename']) {
+        $filename = 'paste-' . $id . '.txt';
+    }
 
     return new Response($paste['paste'], 200, array(
         'Cache-Control' => 's-maxage=300',

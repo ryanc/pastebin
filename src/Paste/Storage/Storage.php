@@ -19,7 +19,7 @@ class Storage
     public function get($id)
     {
         // $sql = 'SELECT paste, created_at FROM pastes WHERE id = ?';
-        $sql = 'SELECT paste, timestamp FROM pastes WHERE id = ?';
+        $sql = 'SELECT paste, filename, timestamp FROM pastes WHERE id = ?';
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(1, $id);
         $stmt->execute();
@@ -30,12 +30,17 @@ class Storage
 
     public function save($paste)
     {
-        $paste = $this->normalizeContent($paste);
+        if (null != $filename = $paste['filename']) {
+            $filename = $paste['filename'];
+        }
+
+        $paste = $this->normalizeContent($paste['paste']);
 
         // $sql = 'INSERT INTO pastes (paste) VALUES (?) RETURNING id';
-        $sql = 'INSERT INTO pastes (paste) VALUES (?)';
+        $sql = 'INSERT INTO pastes (paste, filename) VALUES (?, ?)';
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(1, $paste);
+        $stmt->bindValue(2, $filename);
         $stmt->execute();
         $id = $this->db->lastInsertId();
 

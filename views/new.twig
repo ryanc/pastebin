@@ -4,16 +4,17 @@
 
 <form action="#" method="post">
 
-    {{ form_errors(form) }}
-    
-    {{ form_errors(form.paste) }}
-    {{ form_widget(form.paste) }}
+  {{ form_errors(form) }}
+  
+  {{ form_errors(form.paste) }}
+  {{ form_widget(form.paste) }}
 
-    {{ form_widget(form._token) }}
+  {{ form_widget(form._token) }}
 
-    <p class="right">
-        <button class="button-main" type="submit">Paste It</button>
-    </p>
+  <p class="right">
+    {{ form_widget(form.filename, { attr: {'placeholder': 'Optional filename ...'} }) }}
+    <button class="button-main" type="submit">Paste It</button>
+  </p>
 
 </form>
 {% endblock %}
