@@ -77,7 +77,7 @@ $app->get('/p/{id}', function($id) use ($app) {
         'Cache-Control' => 's-maxage=300',
     ));
 })
-->assert('id', '\d+');
+->assert('id', '\w+');
 
 $app->get('/p/{id}/raw', function($id) use ($app) {
     $paste = $app['storage']->get($id);
@@ -87,7 +87,7 @@ $app->get('/p/{id}/raw', function($id) use ($app) {
         'Content-Type'  => 'text/plain',
     ));
 })
-->assert('id', '\d+');
+->assert('id', '\w+');
 
 $app->get('/p/{id}/download', function($id) use ($app) {
     $paste = $app['storage']->get($id);
@@ -101,7 +101,7 @@ $app->get('/p/{id}/download', function($id) use ($app) {
         'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
     ));
 })
-->assert('id', '\d+');
+->assert('id', '\w+');
 
 $app->error(function(\Exception $ex, $code) use ($app) {
     if ($code !== 404) {

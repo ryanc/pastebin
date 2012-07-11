@@ -19,7 +19,7 @@ class Storage
     public function get($id)
     {
         // $sql = 'SELECT paste, created_at FROM pastes WHERE id = ?';
-        $sql = 'SELECT paste, filename, timestamp FROM pastes WHERE id = ?';
+        $sql = 'SELECT paste, filename, timestamp FROM pastes WHERE token = ?';
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(1, $id);
         $stmt->execute();
@@ -46,14 +46,16 @@ class Storage
 
         $stmt = null;
 
+        $token = $this->getId($id);
+
         // $sql = 'UPDATE pastes SET slug = ? WHERE id = ?';
         $sql = 'UPDATE pastes SET token = ? WHERE id = ?';
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(1, $this->getId($id));
+        $stmt->bindValue(1, $token);
         $stmt->bindValue(2, $id);
         $stmt->execute();
 
-        return $id;
+        return $token;
     }
 
     /*
