@@ -77,8 +77,7 @@ $app->get('/p/{id}', function($id) use ($app) {
 
     $view = $app['twig']->render('paste.twig', array(
         'paste' => $paste,
-        // 'id'    => $id
-        'id' => $app['storage']->getId($id),
+        'id' => $id,
     ));
     
     return new Response($view, 200, array(
