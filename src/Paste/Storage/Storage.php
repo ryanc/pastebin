@@ -85,6 +85,7 @@ class Storage
     {
         $alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $id = '';
+        $int = (int) $int;
 
         if ($int === 0) {
             return $alphabet[0];
