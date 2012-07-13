@@ -7,7 +7,7 @@
   {{ form_errors(form) }}
   
   {{ form_errors(form.paste) }}
-  {{ form_widget(form.paste) }}
+  {{ form_widget(form.paste, { attr: {'placeholder': 'Paste stuff here ...'} }) }}
 
   {{ form_widget(form._token) }}
 
