@@ -6,10 +6,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 $app = new Silex\Application;
 
 require __DIR__ . '/bootstrap.php';
+
+$app->get('/', function() use ($app) {
+    // Redirect to /p/new.
+    $subRequest = Request::create('/p/new', 'GET');
+
+    return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+});
 
 $app->get('/p/new', function () use ($app) {
     $paste = array();
