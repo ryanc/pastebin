@@ -2,15 +2,12 @@
 
 namespace Paste\Storage;
 
+use Paste\Entity\Paste;
+
 class Storage
 {
     protected $db;
     
-    protected function normalizeContent($content)
-    {
-        return preg_replace(array('#\r?\n#', '#\r#'), "\n", $content);
-    }
-
     public function __construct(\Doctrine\DBAL\Connection $db)
     {
         $this->db = $db;
@@ -19,27 +16,32 @@ class Storage
     public function get($id)
     {
         // $sql = 'SELECT paste, created_at FROM pastes WHERE id = ?';
-        $sql = 'SELECT paste, filename, timestamp FROM pastes WHERE token = ?';
+        $sql = 'SELECT id, paste, filename, token, timestamp FROM pastes WHERE token = ?';
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(1, $id);
         $stmt->execute();
-        $paste = $stmt->fetch();
+        $result = $stmt->fetch();
+
+        $paste = new Paste();
+        $paste->setId($result['id']);
+        $paste->setContents($result['paste']);
+        $paste->setTimestamp($result['timestamp']);
+        $paste->setToken($result['token']);
+        $paste->setFilename($result['filename']);
 
         return $paste;
     }
 
     public function save($paste)
     {
-        if (null != $filename = $paste['filename']) {
-            $filename = $paste['filename'];
+        if (null != $filename = $paste->getFilename()) {
+            $filename = $paste->getFilename();
         }
-
-        $paste = $this->normalizeContent($paste['paste']);
 
         // $sql = 'INSERT INTO pastes (paste) VALUES (?) RETURNING id';
         $sql = 'INSERT INTO pastes (paste, filename) VALUES (?, ?)';
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(1, $paste);
+        $stmt->bindValue(1, $paste->getContents());
         $stmt->bindValue(2, $filename);
         $stmt->execute();
         $id = $this->db->lastInsertId();

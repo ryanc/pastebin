@@ -2,11 +2,12 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+
+use Paste\Form;
 
 $app = new Silex\Application;
 
@@ -20,17 +21,9 @@ $app->get('/', function() use ($app) {
 });
 
 $app->get('/p/new', function () use ($app) {
-    $paste = array();
 
-    $form = $app['form.factory']->createBuilder('form', $paste)
-        ->add('paste', 'textarea', array(
-            'constraints' => new Assert\NotBlank,
-        ))
-        ->add('filename', 'text', array(
-            'required' => false,
-        ))
-        ->getForm();
-    ;
+    $form = $app['form.factory']->createBuilder(new Form\Paste);
+    $form = $form->getForm();
 
     $view = $app['twig']->render('new.twig', array(
         'form' => $form->createView()
@@ -43,17 +36,8 @@ $app->get('/p/new', function () use ($app) {
 
 $app->post('/p/new', function(Request $request) use ($app) {
 
-    $paste = array();
-
-    $form = $app['form.factory']->createBuilder('form', $paste)
-        ->add('paste', 'textarea', array(
-            'constraints' => new Assert\NotBlank,
-        ))
-        ->add('filename', 'text', array(
-            'required' => false,
-        ))
-        ->getForm();
-    ;
+    $form = $app['form.factory']->createBuilder(new Form\Paste);
+    $form = $form->getForm();
 
     $form->bindRequest($request);
 
@@ -89,7 +73,7 @@ $app->get('/p/{id}', function($id) use ($app) {
 $app->get('/p/{id}/raw', function($id) use ($app) {
     $paste = $app['storage']->get($id);
 
-    return new Response($paste['paste'], 200, array(
+    return new Response($paste->getContents(), 200, array(
         'Cache-Control' => 's-maxage=300',
         'Content-Type'  => 'text/plain',
     ));
@@ -99,11 +83,11 @@ $app->get('/p/{id}/raw', function($id) use ($app) {
 $app->get('/p/{id}/download', function($id) use ($app) {
     $paste = $app['storage']->get($id);
 
-    if (null == $filename = $paste['filename']) {
+    if (null == $filename = $paste->getFilename()) {
         $filename = 'paste-' . $id . '.txt';
     }
 
-    return new Response($paste['paste'], 200, array(
+    return new Response($paste->getContents(), 200, array(
         'Cache-Control' => 's-maxage=300',
         'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
     ));
