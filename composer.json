@@ -15,5 +15,6 @@
     },
     "autoload": {
         "psr-0": { "Paste": "src/" }
-    }
+    },
+    "minimum-stability": "dev"
 }
