@@ -15,7 +15,6 @@ class Storage
 
     public function get($id)
     {
-        // $sql = 'SELECT paste, created_at FROM pastes WHERE id = ?';
         $sql = 'SELECT id, paste, filename, token, timestamp FROM pastes WHERE token = ?';
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(1, $id);
@@ -38,7 +37,6 @@ class Storage
             $filename = $paste->getFilename();
         }
 
-        // $sql = 'INSERT INTO pastes (paste) VALUES (?) RETURNING id';
         $sql = 'INSERT INTO pastes (paste, filename) VALUES (?, ?)';
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(1, $paste->getContents());
@@ -50,7 +48,6 @@ class Storage
 
         $token = $this->getId($id);
 
-        // $sql = 'UPDATE pastes SET slug = ? WHERE id = ?';
         $sql = 'UPDATE pastes SET token = ? WHERE id = ?';
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(1, $token);
