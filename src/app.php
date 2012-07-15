@@ -94,6 +94,20 @@ $app->get('/p/{id}/download', function($id) use ($app) {
 })
 ->assert('id', '\w+');
 
+$app->get('/p/{id}/dupe', function($id) use ($app) {
+    $paste = $app['storage']->get($id);
+
+    $form = $app['form.factory']->createBuilder(new Form\Paste, $paste);
+    $form = $form->getForm();
+
+    $view = $app['twig']->render('new.twig', array(
+        'form' => $form->createView(),
+    ));
+
+    return $view;
+})
+->assert('id', '\w+');
+
 $app->error(function(\Exception $ex, $code) use ($app) {
     if ($code !== 404) {
         return;
