@@ -21,6 +21,17 @@ class Storage
         $stmt->execute();
         $result = $stmt->fetch();
 
+        // The statement failed to execute.
+        if (false === $stmt->execute()) {
+            throw new \RuntimeException('SQL statement failed to execute.');
+        }
+
+        // There are no results.
+        if (false === $result = $stmt->fetch()) {
+            return false;
+        }
+
+        // Assemble a paste model.
         $paste = new Paste();
         $paste->setId($result['id']);
         $paste->setContents($result['paste']);
