@@ -1,0 +1,7 @@
+TO DO
+=====
+
+ * Add a paste listing.
+ * Store recent pastes in a session.
+ * Add an nginx config file.
+ * 404 is no longer working.
