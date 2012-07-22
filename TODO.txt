@@ -5,3 +5,6 @@ TO DO
  * Store recent pastes in a session.
  * Add an nginx config file.
  * Unit tests.
+ * Make the 404 more generic.
+ * Move the controllers to a separate file.
+ * Add link colors.
