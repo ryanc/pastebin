@@ -33,6 +33,8 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__ . '/../logs/pastebin.log',
 ));
 
+$app->register(new Silex\Provider\SessionServiceProvider);
+
 $app['storage'] = $app->share(function() use ($app) {
     return new Paste\Storage\Storage($app['db']);
 });

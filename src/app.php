@@ -46,6 +46,16 @@ $app->post('/p/new', function(Request $request) use ($app) {
 
         $id = $app['storage']->save($paste);
 
+        // Save id to the recent pastes.
+        $recentPastes = array();
+
+        if (true === $app['session']->has('recentPastes')) {
+            $recentPastes = $app['session']->get('recentPastes');
+        }
+
+        $recentPastes[] = $id;
+        $app['session']->set('recentPastes', $recentPastes);
+
         return new RedirectResponse('/p/' . $id);
     }
 
