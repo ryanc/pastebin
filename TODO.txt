@@ -5,4 +5,3 @@ TO DO
  * Store recent pastes in a session.
  * Add an nginx config file.
  * Unit tests.
- * Add composer.lock
