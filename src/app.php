@@ -72,6 +72,13 @@ $app->get('/p/history', function() use ($app) {
     return $view;
 });
 
+$app->get('/p/history/clear', function() use ($app) {
+    $app['session']->remove('recentPastes');
+    $subRequest = Request::create('/p/history', 'GET');
+
+    return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+});
+
 $app->get('/p/{id}', function($id) use ($app) {
     $paste = $app['storage']->get($id);
 
