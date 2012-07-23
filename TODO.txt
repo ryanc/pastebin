@@ -9,3 +9,4 @@ TO DO
  * Move the controllers to a separate file.
  * Add link colors.
  * Log PHP version.
+ * Logo should link back to index.
