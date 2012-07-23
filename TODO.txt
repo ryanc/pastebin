@@ -10,3 +10,5 @@ TO DO
  * Add link colors.
  * Log PHP version.
  * Logo should link back to index.
+ * Add view counts to pastes.
+ * Save IP address to database when paste is created.
