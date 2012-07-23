@@ -8,3 +8,4 @@ TO DO
  * Make the 404 more generic.
  * Move the controllers to a separate file.
  * Add link colors.
+ * Log PHP version.
