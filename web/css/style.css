@@ -36,6 +36,26 @@
 }
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: inherit;
+}
+h3 {
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+}
+a {
+  color: #195ecf;
+}
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 textarea {
   width: 100%;
