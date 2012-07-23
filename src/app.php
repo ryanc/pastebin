@@ -62,6 +62,16 @@ $app->post('/p/new', function(Request $request) use ($app) {
     return $app['twig']->render('new.twig', array('form' => $form->createView()));
 });
 
+$app->get('/p/history', function() use ($app) {
+    $recentPastes = $app['session']->get('recentPastes');
+
+    $view = $app['twig']->render('history.twig', array(
+        'history' => $recentPastes,
+    ));
+
+    return $view;
+});
+
 $app->get('/p/{id}', function($id) use ($app) {
     $paste = $app['storage']->get($id);
 
