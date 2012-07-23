@@ -1,0 +1,16 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+<h3>Your Recent Pastes</h3>
+
+{% if not history  %}
+  <p>You have not created any pastes yet. <a href="/p/new">Create one now</a></p>
+{% else %}
+<ul>
+  {% for paste in history %}
+    <li><a href="/p/{{ paste }}">Paste #{{ paste }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}
