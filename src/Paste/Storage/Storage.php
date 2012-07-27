@@ -15,9 +15,9 @@ class Storage
 
     public function get($id)
     {
-        $sql = 'SELECT id, paste, filename, token, timestamp FROM pastes WHERE token = ?';
+        $sql = 'SELECT id, paste, filename, token, timestamp FROM pastes WHERE token = :token';
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(1, $id);
+        $stmt->bindValue(':token', $id);
         $stmt->execute();
         $result = $stmt->fetch();
 
@@ -48,10 +48,10 @@ class Storage
             $filename = $paste->getFilename();
         }
 
-        $sql = 'INSERT INTO pastes (paste, filename) VALUES (?, ?)';
+        $sql = 'INSERT INTO pastes (paste, filename) VALUES (:paste, :filename)';
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(1, $paste->getContents());
-        $stmt->bindValue(2, $filename);
+        $stmt->bindValue(':paste', $paste->getContents());
+        $stmt->bindValue(':filename', $filename);
         $stmt->execute();
         $id = $this->db->lastInsertId();
 
@@ -59,10 +59,10 @@ class Storage
 
         $token = $this->getId($id);
 
-        $sql = 'UPDATE pastes SET token = ? WHERE id = ?';
+        $sql = 'UPDATE pastes SET token = :token WHERE id = :id';
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(1, $token);
-        $stmt->bindValue(2, $id);
+        $stmt->bindValue(':token', $token);
+        $stmt->bindValue(':id', $id);
         $stmt->execute();
 
         return $token;
