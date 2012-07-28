@@ -103,7 +103,7 @@ class Storage
 
         $stack = array();
         
-        while($int) {
+        while ($int) {
             $remainder = bcmod($int, 62);
             $int = $this->bcfloor(bcdiv($int, 62));
             $id = $alphabet[$remainder] . $id;
