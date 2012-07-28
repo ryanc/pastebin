@@ -7,6 +7,10 @@ use Paste\Entity\Paste;
 class Storage
 {
     protected $db;
+
+    const DIGITS = '0123456789';
+    const ASCII_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
+    const ASCII_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     
     public function __construct(\Doctrine\DBAL\Connection $db)
     {
@@ -15,7 +19,10 @@ class Storage
 
     public function get($id)
     {
-        $sql = 'SELECT id, paste, filename, token, timestamp FROM pastes WHERE token = :token';
+        $sql = 'SELECT id, paste, filename, token, timestamp '
+             . 'FROM pastes '
+             . 'WHERE token = :token';
+
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':token', $id);
         $stmt->execute();
@@ -48,7 +55,9 @@ class Storage
             $filename = $paste->getFilename();
         }
 
-        $sql = 'INSERT INTO pastes (paste, filename) VALUES (:paste, :filename)';
+        $sql = 'INSERT INTO pastes (paste, filename) '
+             . 'VALUES (:paste, :filename)';
+
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':paste', $paste->getContents());
         $stmt->bindValue(':filename', $filename);
@@ -59,7 +68,9 @@ class Storage
 
         $token = $this->getId($id);
 
-        $sql = 'UPDATE pastes SET token = :token WHERE id = :id';
+        $sql = 'UPDATE pastes '
+             . 'SET token = :token WHERE id = :id';
+
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':token', $token);
         $stmt->bindValue(':id', $id);
@@ -71,7 +82,7 @@ class Storage
     /*
     public function getId($int)
     {
-        $alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $alphabet = self::DIGITS . self::ASCII_LOWERCASE . self::ASCII_UPPERCASE;
 
         if ($int === 0) {
             return $alphabet[0];
@@ -93,7 +104,8 @@ class Storage
 
     public function getId($int)
     {
-        $alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $alphabet = self::DIGITS . self::ASCII_LOWERCASE . self::ASCII_UPPERCASE;
+
         $id = '';
         $int = (int) $int;
 
