@@ -3,15 +3,12 @@
 namespace Paste\Storage;
 
 use Paste\Entity\Paste;
+use Paste\Math\Base62;
 
 class Storage
 {
     protected $db;
 
-    const DIGITS = '0123456789';
-    const ASCII_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
-    const ASCII_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    
     public function __construct(\Doctrine\DBAL\Connection $db)
     {
         $this->db = $db;
@@ -51,6 +48,8 @@ class Storage
 
     public function save($paste)
     {
+        $base62 = new Base62;
+
         if (null != $filename = $paste->getFilename()) {
             $filename = $paste->getFilename();
         }
@@ -66,7 +65,7 @@ class Storage
 
         $stmt = null;
 
-        $token = $this->getId($id);
+        $token = $base62->encode($id);
 
         $sql = 'UPDATE pastes '
              . 'SET token = :token WHERE id = :id';
@@ -101,51 +100,4 @@ class Storage
         return implode($stack);
     }
     */
-
-    public function getId($int)
-    {
-        $alphabet = self::DIGITS . self::ASCII_LOWERCASE . self::ASCII_UPPERCASE;
-
-        $id = '';
-        $int = (int) $int;
-
-        if ($int === 0) {
-            return $alphabet[0];
-        }
-
-        $stack = array();
-        
-        while ($int) {
-            $remainder = bcmod($int, 62);
-            $int = $this->bcfloor(bcdiv($int, 62));
-            $id = $alphabet[$remainder] . $id;
-        }
-
-        return $id;
-    }
-
-    /**
-     * Use the bcmath functions to make a floor() function.
-     *
-     * Inspired by: http://stackoverflow.com/a/1653826
-     *
-     * @param string $number
-     * @return string
-     */
-    private function bcfloor($number)
-    {
-        // If there is not a decimal place, just return the number.
-        if (strpos($number, '.') === false) {
-            return $number;
-        }
-
-        // If the number is negative, subtract 1 which rounds to the lowest
-        // negative integer.
-        if ($number[0] === '-') {
-            return bcsub($number, 1, 0);
-        }
-
-        // If the number is positive and whole, add zero.
-        return bcadd($number, 0, 0);
-    }
 }
