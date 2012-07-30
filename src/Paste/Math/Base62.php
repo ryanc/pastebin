@@ -57,23 +57,23 @@ class Base62
      *
      * Inspired by: http://stackoverflow.com/a/1653826
      *
-     * @param string $number
+     * @param string $num
      * @return string
      */
-    private function bcfloor($number)
+    private function bcfloor($num)
     {
         // If there is not a decimal place, just return the number.
-        if (strpos($number, '.') === false) {
-            return $number;
+        if (strpos($num, '.') === false) {
+            return $num;
         }
 
         // If the number is negative, subtract 1 which rounds to the lowest
         // negative integer.
-        if ($number[0] === '-') {
-            return bcsub($number, 1, 0);
+        if ($num[0] === '-') {
+            return bcsub($num, 1, 0);
         }
 
         // If the number is positive and whole, add zero.
-        return bcadd($number, 0, 0);
+        return bcadd($num, 0, 0);
     }
 }
