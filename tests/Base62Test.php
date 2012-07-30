@@ -1,7 +1,5 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
 use Paste\Math\Base62;
 
 class Base62Test extends PHPUnit_Framework_TestCase
