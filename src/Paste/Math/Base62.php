@@ -5,18 +5,40 @@ namespace Paste\Math;
 class Base62
 {
     const DIGITS = '0123456789';
+
     const ASCII_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
+
     const ASCII_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+    /**
+     * The base 62 alphabet.
+     *
+     * @var string
+     */
     protected $alphabet;
 
     public function __construct()
     {
+        // Build an alphabet for the base converter.
         $this->alphabet = self::DIGITS
                         . self::ASCII_LOWERCASE
                         . self::ASCII_UPPERCASE;
     }
     
+    /**
+     * Convert a base 10 number to base 62.
+     *
+     * Example:
+     * <code>
+     * use Paste\Math\Base62;
+     *
+     * $encoder = new Base62;
+     * $num = $encoder->encode(1234);
+     * </code>
+     *
+     * @param string|integer $num A base 10 number.
+     * @return string A base 62 number.
+     */
     public function encode($num)
     {
         $str = '';
@@ -34,6 +56,20 @@ class Base62
         return $str;
     }
 
+    /**
+     * Convert a base 62 number to base 10.
+     *
+     * Example:
+     * <code>
+     * use Paste\Math\Base62;
+     *
+     * $encoder = new Base62;
+     * $num = $encoder->decode('1a2b');
+     * </code>
+     *
+     * @param string $num A base 62 number.
+     * @return string A base 10 number.
+     */
     public function decode($str)
     {
         $num = 0;
