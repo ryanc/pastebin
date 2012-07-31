@@ -16,7 +16,7 @@ class Storage
 
     public function get($id)
     {
-        $sql = 'SELECT id, paste, filename, token, timestamp '
+        $sql = 'SELECT id, paste, filename, token, timestamp, ip '
              . 'FROM pastes '
              . 'WHERE token = :token';
 
@@ -42,6 +42,7 @@ class Storage
         $paste->setTimestamp($result['timestamp']);
         $paste->setToken($result['token']);
         $paste->setFilename($result['filename']);
+        $paste->setBinaryIp($result['ip']);
 
         return $paste;
     }
@@ -54,12 +55,13 @@ class Storage
             $filename = $paste->getFilename();
         }
 
-        $sql = 'INSERT INTO pastes (paste, filename) '
-             . 'VALUES (:paste, :filename)';
+        $sql = 'INSERT INTO pastes (paste, filename, ip) '
+             . 'VALUES (:paste, :filename, :ip)';
 
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':paste', $paste->getContents());
         $stmt->bindValue(':filename', $filename);
+        $stmt->bindValue(':ip', $paste->getBinaryIp());
         $stmt->execute();
         $id = $this->db->lastInsertId();
 

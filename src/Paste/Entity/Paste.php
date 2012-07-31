@@ -14,6 +14,8 @@ class Paste
 
     protected $filename;
 
+    protected $ip;
+
     public function setId($id)
     {
         $this->id = $id;
@@ -41,6 +43,16 @@ class Paste
         $this->filename = $filename;
     }
 
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+    }
+
+    public function setBinaryIp($ip)
+    {
+        $this->ip = inet_ntop($ip);
+    }
+
     public function getId()
     {
         return $this->id;
@@ -59,6 +71,16 @@ class Paste
     public function getFilename()
     {
         return $this->filename;
+    }
+
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    public function getBinaryIp()
+    {
+        return inet_pton($this->ip);
     }
 
     protected function normalizeContent($content)

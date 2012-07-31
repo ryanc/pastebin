@@ -43,6 +43,7 @@ $app->post('/p/new', function(Request $request) use ($app) {
 
     if ($form->isValid()) {
         $paste = $form->getData();
+        $paste->setIp($request->getClientIp());
 
         $id = $app['storage']->save($paste);
 
