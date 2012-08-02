@@ -7,7 +7,7 @@ use Paste\Math\Base62;
 
 class Storage
 {
-    protected $db;
+    private $db;
 
     public function __construct(\Doctrine\DBAL\Connection $db)
     {
@@ -102,4 +102,14 @@ class Storage
         return implode($stack);
     }
     */
+
+    public function close()
+    {
+        $this->db = null;
+    }
+
+    public function __destruct()
+    {
+        $this->close();
+    }
 }
