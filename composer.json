@@ -8,7 +8,9 @@
         "symfony/validator": "2.1.*",
         "symfony/config": "2.1.*",
         "symfony/translation": "2.1.*",
-        "monolog/monolog": ">=1.0.0"
+        "monolog/monolog": ">=1.0.0",
+        "symfony/console": "2.1.*",
+        "doctrine/migrations": "dev-master"
     },
     "require-dev": {
         "phing/phing": "2.4.*"
