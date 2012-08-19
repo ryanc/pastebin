@@ -4,10 +4,19 @@ namespace Paste\Math;
 
 class Base62
 {
+    /**
+     * @var string
+     */
     const DIGITS = '0123456789';
 
+    /**
+     * @var string
+     */
     const ASCII_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
 
+    /**
+     * @var string
+     */
     const ASCII_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
     /**

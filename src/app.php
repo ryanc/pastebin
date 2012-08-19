@@ -6,9 +6,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 $app = new Silex\Application;
 
-require __DIR__ . '/bootstrap.php';
-require __DIR__ . '/controllers.php';
-
 $app->error(function(\Exception $ex, $code) use ($app) {
     if ($code !== 404) {
         return;
