@@ -22,8 +22,8 @@
         {
             "package": "monolog/monolog",
             "version": "dev-master",
-            "source-reference": "ae31045917db536eedee8c6b6abed5052d115763",
-            "commit-date": "1344607218"
+            "source-reference": "1.2.0",
+            "commit-date": "1345310833"
         },
         {
             "package": "pimple/pimple",
@@ -82,8 +82,8 @@
         {
             "package": "symfony/event-dispatcher",
             "version": "dev-master",
-            "source-reference": "v2.1.0-BETA4",
-            "commit-date": "1342739894"
+            "source-reference": "76c76f62702b09e0f182ae618be0f1d79e2a711f",
+            "commit-date": "1345066712"
         },
         {
             "package": "symfony/form",
@@ -94,8 +94,8 @@
         {
             "package": "symfony/form",
             "version": "dev-master",
-            "source-reference": "43affe655a965d225557c289b0efcfc3dfbf11d5",
-            "commit-date": "1345137747"
+            "source-reference": "74583bb7a8ed758c29431b4900467db04ddd0b32",
+            "commit-date": "1345322868"
         },
         {
             "package": "symfony/http-foundation",
@@ -202,8 +202,8 @@
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "3e4057b4b14a2f90db7c895e3e9bcbd3d23875e8",
-            "commit-date": "1345222881"
+            "source-reference": "552143062982fd15a1d6fe5a0cdda1f007212154",
+            "commit-date": "1345489844"
         }
     ],
     "packages-dev": null,
