@@ -91,7 +91,7 @@ $app->get('/p/{id}', function($id) use ($app) {
 })
 ->assert('id', '\w+');
 
-$app->get('/p/{id}/raw', function($id) use ($app) {
+$app->get('/p/{id}/raw/{filename}', function($id, $filename) use ($app) {
     $paste = $app['storage']->get($id);
 
     return new Response($paste->getContents(), 200, array(
@@ -99,7 +99,8 @@ $app->get('/p/{id}/raw', function($id) use ($app) {
         'Content-Type'  => 'text/plain',
     ));
 })
-->assert('id', '\w+');
+->assert('id', '\w+')
+->value('filename', null);
 
 $app->get('/p/{id}/download', function($id) use ($app) {
     $paste = $app['storage']->get($id);
