@@ -1,9 +1,11 @@
 #!/bin/bash
 
-VHOST_PATH="/www/paste.confabulator.net"
+VHOST_DIR="/www/paste.confabulator.net"
 DB="pastebin.db"
-DB_PATH="$VHOST_PATH/db/$DB"
+DB_PATH="$VHOST_DIR/db/$DB"
 TIMESTAMP=`date +%s`
-BACKUP_PATH="$VHOST_PATH/backups/pastebin-$TIMESTAMP.db"
+BACKUP_DIR="$VHOST_DIR/backups"
+BACKUP_PATH="$BACKUP_DIR/pastebin-$TIMESTAMP.db"
 
 sqlite3 $DB_PATH ".backup $BACKUP_PATH"
+ln -nfs $BACKUP_PATH $BACKUP_DIR/pastebin-latest.db
