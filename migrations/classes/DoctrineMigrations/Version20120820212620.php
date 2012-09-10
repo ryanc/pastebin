@@ -18,7 +18,7 @@ class Version20120820212620 extends AbstractMigration
                 'id INTEGER PRIMARY KEY NOT NULL, ' .
                 'timestamp DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, ' .
                 'paste TEXT NOT NULL, ' .
-                'token VARCHAR(50) NOT NULL, ' .
+                'token VARCHAR(50), ' .
                 'filename VARCHAR(100)' .
             ')'
         );
