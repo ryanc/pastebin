@@ -1,0 +1,106 @@
+#!/bin/bash
+
+SRC_DIR="/tmp"
+
+PHP_VERSION="5.3.14"
+PHP_SRC="php-$PHP_VERSION.tar.bz2"
+PHP_URL="http://us.php.net/get/$PHP_SRC/from/this/mirror"
+PHP_SRCDIR=${PHP_SRC%.tar.bz2}
+PHP_MD5="7caac4f71e2f21426c11ac153e538392"
+
+SUHOSIN_VERSION="0.9.10"
+SUHOSIN_PHP_VERSION="5.3.9"
+SUHOSIN_SRC="suhosin-patch-$SUHOSIN_PHP_VERSION-$SUHOSIN_VERSION.patch.gz"
+SUHOSIN_PATCH=${SUHOSIN_SRC%.gz}
+SUHOSIN_URL="http://download.suhosin.org/$SUHOSIN_SRC"
+SUHOSIN_MD5="c099b3d7eac95018ababd41ded7f3066"
+
+if [ ! -e $PHP_SRC ]; then
+    echo "Fetching PHP $PHP_VERSION source ..."
+    wget $PHP_URL -O $PHP_SRC  &> /dev/null
+fi
+
+echo "Checking PHP MD5 hash ..."
+MD5_TMP=`md5sum $SRC_DIR/$PHP_SRC`
+MD5_TMP=${MD5_TMP%%$SRC_DIR/$PHP_SRC}
+MD5_TMP=${MD5_TMP%% }
+
+if [ $PHP_MD5 != $MD5_TMP ]; then
+    echo "ERROR: The PHP MD5 hash does not match."
+    exit 1
+fi
+
+if [ ! -d $SRC_DIR/$PHP_SRCDIR ]; then
+    echo "Extracting PHP $PHP_VERSION source ..."
+    cd $SRC_DIR
+    tar xf $PHP_SRC
+fi
+
+#if [ ! -d $SRC_DIR/$PHP_SRCDIR/sapi/fpm ]; then
+#    echo "Applying PHP FPM patch ..."
+#	cd $SRC_DIR/$PHP_SRCDIR
+#	svn co http://svn.php.net/repository/php/php-src/trunk/sapi/fpm sapi/fpm >/dev/null 2>&1
+#	./buildconf --force
+#fi
+
+if [ ! -e $SRC_DIR/$SUHOSIN_SRC ]; then
+    echo "Fetching PHP Suhosin patch ..."
+	cd $SRC_DIR
+	wget $SUHOSIN_URL >/dev/null 2>&1
+fi
+
+echo "Checking Suhosin MD5 hash ..."
+MD5_TMP=`md5sum $SRC_DIR/$SUHOSIN_SRC`
+MD5_TMP=${MD5_TMP%%$SRC_DIR/$SUHOSIN_SRC}
+MD5_TMP=${MD5_TMP%% }
+
+if [ $SUHOSIN_MD5 != $MD5_TMP ]; then
+    echo "ERROR: The Suhosin MD5 hash does not match."
+    exit 1
+fi
+
+if [ -e $SRC_DIR/$SUHOSIN_SRC ]; then 
+	echo "Applying PHP Suhosin patch ..."
+	cd $SRC_DIR
+	gunzip $SUHOSIN_SRC
+	cd $SRC_DIR/$PHP_SRCDIR
+	patch -p 1 -i ../$SUHOSIN_PATCH >/dev/null 2>&1
+fi
+
+if [ -d $SRC_DIR/$PHP_SRCDIR ]; then
+    cd $SRC_DIR/$PHP_SRCDIR
+    if [ -d $SRC_DIR/$PHP_SRCDIR/objs ]; then
+        echo "Cleaning PHP source tree ..."
+        make clean >/dev/null 2>&1
+    fi
+    echo "Building PHP $PHP_VERSION ..."
+	./configure \
+	 --enable-fpm \
+	 --prefix=/usr/local/php53 \
+	 --with-mysql=mysqlnd \
+	 --with-pgsql=/usr/local/pgsql \
+	 --with-mysqli=mysqlnd \
+	 --with-pdo-mysql=mysqlnd \
+	 --with-pdo-pgsql \
+	 --with-zlib \
+	 --with-bz2 \
+	 --with-openssl=/usr/local/ssl \
+	 --with-curl \
+	 --enable-zip \
+	 --with-xsl \
+	 --enable-soap \
+	 --enable-bcmath \
+	 --with-mcrypt \
+	 --enable-ftp \
+     --with-gmp \
+	 --without-gd >/dev/null 2>&1 
+    make >/dev/null 2>&1
+    echo "Installing PHP $PHP_VERSION ..."
+	sudo make install
+fi
+
+if [ -d $SRC_DIR/$PHP_SRCDIR ]; then
+	echo "Cleaning up after the build process ..."
+    rm -rf $SRC_DIR/$PHP_SRCDIR
+	rm $SRC_DIR/$SUHOSIN_PATCH
+fi

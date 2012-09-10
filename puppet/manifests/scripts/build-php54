@@ -1,0 +1,68 @@
+#!/bin/bash
+
+SRC_DIR="/tmp"
+PREFIX="/usr/local/php54"
+
+PHP_VERSION="5.4.6"
+PHP_SRC="php-$PHP_VERSION.tar.bz2"
+PHP_URL="http://us.php.net/get/$PHP_SRC/from/this/mirror"
+PHP_SRCDIR=${PHP_SRC%.tar.bz2}
+PHP_MD5="c9aa0f4996d1b91ee9e45afcfaeb5d2e"
+
+if [ ! -e $PHP_SRC ]; then
+    echo "Fetching PHP $PHP_VERSION source ..."
+    wget $PHP_URL -O $SRC_DIR/$PHP_SRC  &> /dev/null
+fi
+
+echo "Checking PHP MD5 hash ..."
+MD5_TMP=`md5sum $SRC_DIR/$PHP_SRC`
+MD5_TMP=${MD5_TMP%%$SRC_DIR/$PHP_SRC}
+MD5_TMP=${MD5_TMP%% }
+
+if [ $PHP_MD5 != $MD5_TMP ]; then
+    echo "ERROR: The PHP MD5 hash does not match."
+    exit 1
+fi
+
+if [ ! -d $SRC_DIR/$PHP_SRCDIR ]; then
+    echo "Extracting PHP $PHP_VERSION source ..."
+    cd $SRC_DIR
+    tar xf $PHP_SRC
+fi
+
+if [ -d $SRC_DIR/$PHP_SRCDIR ]; then
+    cd $SRC_DIR/$PHP_SRCDIR
+    if [ -d $SRC_DIR/$PHP_SRCDIR/objs ]; then
+        echo "Cleaning PHP source tree ..."
+        make clean >/dev/null 2>&1
+    fi
+    echo "Building PHP $PHP_VERSION ..."
+	./configure \
+	 --enable-fpm \
+	 --prefix=$PREFIX \
+	 --with-mysql=mysqlnd \
+	 --with-pgsql \
+	 --with-mysqli=mysqlnd \
+	 --with-pdo-mysql=mysqlnd \
+	 --with-pdo-pgsql \
+	 --with-zlib \
+	 --with-bz2 \
+	 --with-openssl \
+	 --with-curl \
+	 --enable-zip \
+	 --with-xsl \
+	 --enable-soap \
+	 --enable-bcmath \
+	 --with-mcrypt \
+	 --enable-ftp \
+     --with-gmp \
+	 --without-gd >/dev/null 2>&1 
+    make >/dev/null 2>&1
+    echo "Installing PHP $PHP_VERSION ..."
+	sudo make install
+fi
+
+if [ -d $SRC_DIR/$PHP_SRCDIR ]; then
+	echo "Cleaning up after the build process ..."
+    rm -rf $SRC_DIR/$PHP_SRCDIR
+fi
