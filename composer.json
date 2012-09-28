@@ -13,10 +13,14 @@
         "doctrine/migrations": "dev-master"
     },
     "require-dev": {
-        "phing/phing": "2.4.*"
+        "phing/phing": "2.4.*",
+        "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
-        "psr-0": { "Paste": "src/" }
+        "psr-0": {
+            "Paste": "src/",
+            "Utils": "src/"
+        }
     },
     "minimum-stability": "dev"
 }
