@@ -3,34 +3,37 @@ server {
     # See caveats: http://vagrantup.com/v1/docs/config/vm/share_folder.html
     sendfile off;
 
-	#listen   80; ## listen for ipv4; this line is default and implied
-	#listen   [::]:80 default ipv6only=on; ## listen for ipv6
+    #listen   80; ## listen for ipv4; this line is default and implied
+    #listen   [::]:80 default ipv6only=on; ## listen for ipv6
 
-	root /vagrant/web;
-	index index.php;
+    access_log /vagrant/logs/access.log;
+    error_log /vagrant/logs/error.log;
 
-	server_name localhost;
+    root /vagrant/web;
+    index index.php;
 
-	location / {
-		try_files $uri $uri/ /index.php;
-	}
+    server_name localhost;
 
-	#error_page 404 /404.html;
+    location / {
+        try_files $uri $uri/ /index.php;
+    }
 
-	# redirect server error pages to the static page /50x.html
-	#
-	#error_page 500 502 503 504 /50x.html;
-	#location = /50x.html {
-	#	root /usr/share/nginx/www;
-	#}
+    #error_page 404 /404.html;
 
-	# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-	#
-	location ~ \.php$ {
-		fastcgi_split_path_info ^(.+\.php)(/.+)$;
-		# NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
-		fastcgi_pass 127.0.0.1:9000;
-		fastcgi_index index.php;
-		include fastcgi_params;
-	}
+    # redirect server error pages to the static page /50x.html
+    #
+    #error_page 500 502 503 504 /50x.html;
+    #location = /50x.html {
+    #   root /usr/share/nginx/www;
+    #}
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    #
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        # NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+    }
 }
