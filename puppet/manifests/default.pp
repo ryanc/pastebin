@@ -51,7 +51,10 @@ file {
 
     "/etc/nginx/sites-available/pastebin":
         source  => "/vagrant/puppet/files/etc/nginx/sites-available/pastebin",
-        notify  => File["/etc/nginx/sites-enabled/pastebin"],
+        notify  => [
+            File["/etc/nginx/sites-enabled/pastebin"],
+            Service["nginx"]
+        ],
         require => Package["nginx-light"],
     ;
 
