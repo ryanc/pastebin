@@ -1,11 +1,3 @@
-group { "puppet":
-    ensure => "present",
-}
-
-exec { "apt-get update":
-    command => "/usr/bin/apt-get update",
-}
-
 $packages = [
     "vim",
     "sqlite3",
@@ -32,6 +24,15 @@ $dev_packages = [
 
 $services = ["nginx", "php5-fpm"]
 
+group { "puppet":
+    ensure => "present",
+}
+
+exec { "apt-get update":
+    command => "/usr/bin/apt-get update",
+}
+
+
 package { $packages: 
     ensure  => installed,
     require => Exec["apt-get update"],
@@ -42,25 +43,27 @@ service { $services:
     ensure => running,
 }
 
-file { "/etc/nginx/sites-enabled/default":
-    ensure    => absent,
-    subscribe => Package["nginx-light"],
-}
+file {
+    "/etc/nginx/sites-enabled/default":
+        ensure    => absent,
+        subscribe => Package["nginx-light"],
+    ;
 
-file { "/etc/nginx/sites-available/pastebin":
-    source  => "/vagrant/puppet/files/etc/nginx/sites-available/pastebin",
-    notify  => File["/etc/nginx/sites-enabled/pastebin"],
-    require => Package["nginx-light"],
-}
+    "/etc/nginx/sites-available/pastebin":
+        source  => "/vagrant/puppet/files/etc/nginx/sites-available/pastebin",
+        notify  => File["/etc/nginx/sites-enabled/pastebin"],
+        require => Package["nginx-light"],
+    ;
 
-file { "/etc/nginx/sites-enabled/pastebin":
-    ensure => link,
-    target => "/etc/nginx/sites-available/pastebin",
-    notify => Service["nginx"],
-}
+    "/etc/nginx/sites-enabled/pastebin":
+        ensure => link,
+        target => "/etc/nginx/sites-available/pastebin",
+        notify => Service["nginx"],
+    ;
 
-file { "/etc/php5/conf.d/timezone.ini":
-    source  => "/vagrant/puppet/files/etc/php5/conf.d/timezone.ini",
-    notify  => Service["php5-fpm"],
-    require => Package["php5-fpm"],
+    "/etc/php5/conf.d/timezone.ini":
+        source  => "/vagrant/puppet/files/etc/php5/conf.d/timezone.ini",
+        notify  => Service["php5-fpm"],
+        require => Package["php5-fpm"],
+    ;
 }
