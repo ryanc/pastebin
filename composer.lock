@@ -1,5 +1,5 @@
 {
-    "hash": "333c21539eb164ee419250ee510fedb5",
+    "hash": "b119a051edfab4f59c9d3c3cc95cfdbf",
     "packages": [
         {
             "name": "doctrine/common",
@@ -118,60 +118,6 @@
                 "dbal",
                 "queryobject"
             ]
-        },
-        {
-            "name": "doctrine/migrations",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/migrations",
-                "reference": "3dd738b2a709f4d5185c144292189c6e708ca37d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/doctrine/migrations/zipball/3dd738b2a709f4d5185c144292189c6e708ca37d",
-                "reference": "3dd738b2a709f4d5185c144292189c6e708ca37d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "doctrine/dbal": ">=2.0,<2.5.x-dev"
-            },
-            "require-dev": {
-                "symfony/console": "2.*",
-                "symfony/yaml": "2.*"
-            },
-            "suggest": {
-                "symfony/console": "to run the migration from the console"
-            },
-            "type": "library",
-            "installation-source": "source",
-            "autoload": {
-                "psr-0": {
-                    "Doctrine\\DBAL\\Migrations": "lib"
-                }
-            },
-            "license": [
-                "LGPL"
-            ],
-            "authors": [
-                {
-                    "name": "Jonathan Wage",
-                    "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
-                },
-                {
-                    "name": "Benjamin Eberlei",
-                    "email": "kontakt@beberlei.de"
-                }
-            ],
-            "description": "Database Schema migrations using Doctrine DBAL",
-            "homepage": "http://www.doctrine-project.org",
-            "keywords": [
-                "database",
-                "migrations"
-            ],
-            "time": "1348090059"
         },
         {
             "name": "doctrine/orm",
@@ -337,12 +283,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Silex.git",
-                "reference": "0d02614d88bf6ec0410e7c9c0df556d8c3ef47ca"
+                "reference": "810fcb19c74317289d06b531641cf5dd33f7bf6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Silex/zipball/0d02614d88bf6ec0410e7c9c0df556d8c3ef47ca",
-                "reference": "0d02614d88bf6ec0410e7c9c0df556d8c3ef47ca",
+                "url": "https://github.com/fabpot/Silex/zipball/810fcb19c74317289d06b531641cf5dd33f7bf6f",
+                "reference": "810fcb19c74317289d06b531641cf5dd33f7bf6f",
                 "shasum": ""
             },
             "require": {
@@ -376,7 +322,7 @@
                 "symfony/css-selector": "2.1.*",
                 "symfony/dom-crawler": "2.1.*"
             },
-            "time": "1348695490",
+            "time": "1348836914",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -463,18 +409,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console",
-                "reference": "57d03f87db82eee2d63c2a6a7f767c2e376f6d35"
+                "reference": "1fbfb98e6b976189947df1b519b029e0d967d3f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/Console/zipball/57d03f87db82eee2d63c2a6a7f767c2e376f6d35",
-                "reference": "57d03f87db82eee2d63c2a6a7f767c2e376f6d35",
+                "url": "https://github.com/symfony/Console/zipball/1fbfb98e6b976189947df1b519b029e0d967d3f5",
+                "reference": "1fbfb98e6b976189947df1b519b029e0d967d3f5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "1348488710",
+            "time": "1348842916",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -622,18 +568,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation",
-                "reference": "8180a46bb25c3ab539b5ab7c83617d1cef901279"
+                "reference": "c6d48206a04fc2aa75d396bb23f0152f33eaab0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/HttpFoundation/zipball/8180a46bb25c3ab539b5ab7c83617d1cef901279",
-                "reference": "8180a46bb25c3ab539b5ab7c83617d1cef901279",
+                "url": "https://github.com/symfony/HttpFoundation/zipball/c6d48206a04fc2aa75d396bb23f0152f33eaab0c",
+                "reference": "c6d48206a04fc2aa75d396bb23f0152f33eaab0c",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "1348576376",
+            "time": "1348937790",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -644,7 +590,7 @@
             "autoload": {
                 "psr-0": {
                     "Symfony\\Component\\HttpFoundation": "",
-                    "SessionHandlerInterface": "Symfony/Component/HttpFoundation/Resources/stubs"
+                    "SessionHandlerInterface": "Resources/stubs"
                 }
             },
             "license": [
@@ -670,12 +616,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel",
-                "reference": "10f8418126cba9f7e510eb57e53810d41f9f2add"
+                "reference": "404dce298803bb617ac24967ba07a3cc8e38bef3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/HttpKernel/zipball/10f8418126cba9f7e510eb57e53810d41f9f2add",
-                "reference": "10f8418126cba9f7e510eb57e53810d41f9f2add",
+                "url": "https://github.com/symfony/HttpKernel/zipball/404dce298803bb617ac24967ba07a3cc8e38bef3",
+                "reference": "404dce298803bb617ac24967ba07a3cc8e38bef3",
                 "shasum": ""
             },
             "require": {
@@ -701,7 +647,7 @@
                 "symfony/dependency-injection": "2.1.*",
                 "symfony/finder": "2.1.*"
             },
-            "time": "1348209286",
+            "time": "1348853105",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -897,12 +843,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Translation",
-                "reference": "v2.1.2"
+                "reference": "4fea82d0765c03026c174231c220b50e251fc322"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/Translation/zipball/v2.1.2",
-                "reference": "v2.1.2",
+                "url": "https://github.com/symfony/Translation/zipball/4fea82d0765c03026c174231c220b50e251fc322",
+                "reference": "4fea82d0765c03026c174231c220b50e251fc322",
                 "shasum": ""
             },
             "require": {
@@ -916,6 +862,7 @@
                 "symfony/config": "2.1.*",
                 "symfony/yaml": "2.1.*"
             },
+            "time": "1348842738",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -942,8 +889,7 @@
                 }
             ],
             "description": "Symfony Translation Component",
-            "homepage": "http://symfony.com",
-            "time": "1347274422"
+            "homepage": "http://symfony.com"
         },
         {
             "name": "symfony/twig-bridge",
@@ -1072,18 +1018,18 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Twig.git",
-                "reference": "b8c917972f74da88f0e930ea32a90566739d87ac"
+                "reference": "120cde3fa54c31047edf1cd003752ca119dec9a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Twig/zipball/b8c917972f74da88f0e930ea32a90566739d87ac",
-                "reference": "b8c917972f74da88f0e930ea32a90566739d87ac",
+                "url": "https://github.com/fabpot/Twig/zipball/120cde3fa54c31047edf1cd003752ca119dec9a8",
+                "reference": "120cde3fa54c31047edf1cd003752ca119dec9a8",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "1348667791",
+            "time": "1348936415",
             "type": "library",
             "extra": {
                 "branch-alias": {

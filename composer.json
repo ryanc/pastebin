@@ -9,12 +9,11 @@
         "symfony/config": "2.1.*",
         "symfony/translation": "2.1.*",
         "monolog/monolog": "1.*",
-        "symfony/console": "2.1.*",
-        "doctrine/migrations": "dev-master"
+        "symfony/console": "2.1.*"
     },
     "require-dev": {
         "phing/phing": "2.4.*",
-        "phpunit/phpunit": "3.7.*"
+        "doctrine/migrations": "dev-master"
     },
     "autoload": {
         "psr-0": {
