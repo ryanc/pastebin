@@ -124,7 +124,7 @@ class Storage
         $stmt->bindValue(':digest', $digest);
         $stmt->execute();
 
-        $contentId = $stmt->fetch();
+        $contentId = $stmt->fetchColumn();
 
         if ($contentId !== false) {
             $contentId = (int) $contentId;
