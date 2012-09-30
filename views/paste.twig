@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="paste">
-  <pre><code>{{ paste.contents | e }}</code></pre>
+  <pre><code>{{ paste.content | e }}</code></pre>
 </div>
 <ul id="pasteOptions">
   <li><a href="/p/{{ id | e }}/raw">Raw</a></li>

@@ -16,9 +16,9 @@ class Storage
 
     public function get($id)
     {
-        $sql = 'SELECT id, paste, filename, token, timestamp, ip '
-             . 'FROM pastes '
-             . 'WHERE token = :token';
+        $sql = 'SELECT p.id, c.content, p.filename, p.token, p.timestamp, p.ip '
+             . 'FROM pastes p, paste_content c '
+             . 'WHERE p.content_id = c.id AND p.token = :token';
 
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':token', $id);
@@ -38,7 +38,7 @@ class Storage
         // Assemble a paste model.
         $paste = new Paste();
         $paste->setId($result['id']);
-        $paste->setContents($result['paste']);
+        $paste->setContent($result['content']);
         $paste->setTimestamp($result['timestamp']);
         $paste->setToken($result['token']);
         $paste->setFilename($result['filename']);
@@ -55,13 +55,26 @@ class Storage
             $filename = $paste->getFilename();
         }
 
-        $sql = 'INSERT INTO pastes (paste, filename, ip) '
-             . 'VALUES (:paste, :filename, :ip)';
+        $contentId = $this->alreadyExists($paste->getDigest());
+
+        if ($contentId === false) {
+            $sql = 'INSERT INTO paste_content (content, digest) '
+                 . 'VALUES (:content, :digest)';
+
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':content', $paste->getContent());
+            $stmt->bindValue(':digest', $paste->getDigest()); 
+            $stmt->execute();
+            $contentId = $this->db->lastInsertId();
+        }
+
+        $sql = 'INSERT INTO pastes (filename, ip, content_id) '
+             . 'VALUES (:filename, :ip, :content_id)';
 
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':paste', $paste->getContents());
         $stmt->bindValue(':filename', $filename);
         $stmt->bindValue(':ip', $paste->getBinaryIp());
+        $stmt->bindValue(':content_id', $contentId);
         $stmt->execute();
         $id = $this->db->lastInsertId();
 
@@ -102,6 +115,23 @@ class Storage
         return implode($stack);
     }
     */
+
+    public function alreadyExists($digest)
+    {
+        $sql = 'SELECT id FROM paste_content WHERE digest = :digest';
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':digest', $digest);
+        $stmt->execute();
+
+        $contentId = $stmt->fetch();
+
+        if ($contentId !== false) {
+            $contentId = (int) $contentId;
+        }
+
+        return $contentId;
+    }
 
     public function close()
     {

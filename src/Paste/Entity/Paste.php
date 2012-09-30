@@ -6,7 +6,7 @@ class Paste
 {
     protected $id;
 
-    protected $contents;
+    protected $content;
 
     protected $timestamp;
 
@@ -21,10 +21,10 @@ class Paste
         $this->id = $id;
     }
 
-    public function setContents($contents)
+    public function setContent($content)
     {
-        $this->contents = $this->normalizeContent(
-            $this->trimContent($contents)
+        $this->content = $this->normalizeContent(
+            $this->trimContent($content)
         );
     }
 
@@ -60,9 +60,9 @@ class Paste
         return $this->id;
     }
 
-    public function getContents()
+    public function getContent()
     {
-        return $this->contents;
+        return $this->content;
     }
 
     public function getTimestamp()
@@ -85,6 +85,13 @@ class Paste
         if ($this->ip == null) { return ;}
         
         return inet_pton($this->ip);
+    }
+
+    public function getDigest()
+    {
+        if (!empty($this->content)) {
+            return md5($this->content);
+        }
     }
 
     protected function normalizeContent($content)

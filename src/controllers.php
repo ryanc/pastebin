@@ -94,7 +94,7 @@ $app->get('/p/{id}', function($id) use ($app) {
 $app->get('/p/{id}/raw/{filename}', function($id, $filename) use ($app) {
     $paste = $app['storage']->get($id);
 
-    return new Response($paste->getContents(), 200, array(
+    return new Response($paste->getContent(), 200, array(
         'Cache-Control' => 's-maxage=300',
         'Content-Type'  => 'text/plain',
     ));
@@ -109,7 +109,7 @@ $app->get('/p/{id}/download', function($id) use ($app) {
         $filename = 'paste-' . $id . '.txt';
     }
 
-    return new Response($paste->getContents(), 200, array(
+    return new Response($paste->getContent(), 200, array(
         'Cache-Control' => 's-maxage=300',
         'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
     ));

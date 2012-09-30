@@ -12,7 +12,7 @@ class Paste extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('contents', 'textarea', array(
+        $builder->add('content', 'textarea', array(
             'constraints' => new Assert\NotBlank,
         ));
 
