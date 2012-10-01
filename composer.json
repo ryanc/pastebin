@@ -9,7 +9,7 @@
         "symfony/translation": "2.1.*",
         "monolog/monolog": "1.*",
         "symfony/console": "2.1.*",
-        "doctrine/dbal": "2.1.*"
+        "doctrine/dbal": "2.3.*"
     },
     "require-dev": {
         "phing/phing": "2.4.*",

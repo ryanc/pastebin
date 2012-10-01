@@ -1,5 +1,5 @@
 {
-    "hash": "74ca012ff975f36c3fb9277ab15f0182",
+    "hash": "a89ba262b20cd6e7f6daada87a988eab",
     "packages": [
         {
             "name": "doctrine/common",
@@ -72,24 +72,29 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "2.1.7",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal",
-                "reference": "2.1.7"
+                "reference": "2.3.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/dbal/zipball/2.1.7",
-                "reference": "2.1.7",
+                "url": "https://github.com/doctrine/dbal/zipball/2.3.0",
+                "reference": "2.3.0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "doctrine/common": "2.*"
+                "doctrine/common": "2.3.*"
             },
-            "time": "2012-05-27 19:17:18",
+            "time": "2012-09-20 05:56:37",
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3.x-dev"
+                }
+            },
             "installation-source": "dist",
             "autoload": {
                 "psr-0": {
@@ -97,7 +102,7 @@
                 }
             },
             "license": [
-                "LGPL"
+                "MIT"
             ],
             "authors": [
                 {
@@ -236,12 +241,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Silex.git",
-                "reference": "810fcb19c74317289d06b531641cf5dd33f7bf6f"
+                "reference": "fc82b4255ef081dd7d464c5320ca93a902f9190f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Silex/zipball/810fcb19c74317289d06b531641cf5dd33f7bf6f",
-                "reference": "810fcb19c74317289d06b531641cf5dd33f7bf6f",
+                "url": "https://github.com/fabpot/Silex/zipball/fc82b4255ef081dd7d464c5320ca93a902f9190f",
+                "reference": "fc82b4255ef081dd7d464c5320ca93a902f9190f",
                 "shasum": ""
             },
             "require": {
@@ -275,7 +280,7 @@
                 "symfony/css-selector": "2.1.*",
                 "symfony/dom-crawler": "2.1.*"
             },
-            "time": "1348836914",
+            "time": "1349013590",
             "type": "library",
             "extra": {
                 "branch-alias": {
