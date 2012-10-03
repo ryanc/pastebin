@@ -68,7 +68,7 @@ pre {
 pre code {
   white-space: pre;
   overflow: auto;
-  font-family: "Menlo", monospace;
+  font-family: "Source Code Pro", monospace;
   font-size: 14px;
 }
 #top-bar {
@@ -196,4 +196,12 @@ button:active {
   border-radius: 8px;
   background-color: #f2f2f2;
   padding: 5px;
+}
+.errorMessage {
+  color: #990000;
+  font-weight: bold;
+  background-color: #ffeaea;
+  border-radius: 4px;
+  height: 40px;
+  line-height: 40px;
 }
