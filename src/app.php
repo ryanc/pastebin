@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 $app = new Silex\Application;
 
-$app->error(function(\Exception $ex, $code) use ($app) {
+$app->error(function (\Exception $ex, $code) use ($app) {
     if ($code !== 404) {
         return;
     }

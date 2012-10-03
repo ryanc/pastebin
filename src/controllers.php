@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Paste\Form;
 
-$app->get('/', function() use ($app) {
+$app->get('/', function () use ($app) {
     // Redirect to /p/new.
     $subRequest = Request::create('/p/new', 'GET');
 
@@ -27,7 +27,7 @@ $app->get('/p/new', function () use ($app) {
     ));
 });
 
-$app->post('/p/new', function(Request $request) use ($app) {
+$app->post('/p/new', function (Request $request) use ($app) {
 
     $form = $app['form.factory']->createBuilder(new Form\Paste);
     $form = $form->getForm();
@@ -56,7 +56,7 @@ $app->post('/p/new', function(Request $request) use ($app) {
     return $app['twig']->render('new.twig', array('form' => $form->createView()));
 });
 
-$app->get('/p/history', function() use ($app) {
+$app->get('/p/history', function () use ($app) {
     $recentPastes = $app['session']->get('recentPastes');
 
     $view = $app['twig']->render('history.twig', array(
@@ -66,14 +66,14 @@ $app->get('/p/history', function() use ($app) {
     return $view;
 });
 
-$app->get('/p/history/clear', function() use ($app) {
+$app->get('/p/history/clear', function () use ($app) {
     $app['session']->remove('recentPastes');
     $subRequest = Request::create('/p/history', 'GET');
 
     return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
 });
 
-$app->get('/p/{id}', function($id) use ($app) {
+$app->get('/p/{id}', function ($id) use ($app) {
     $paste = $app['storage']->get($id);
 
     if ($paste === false) {
@@ -91,7 +91,7 @@ $app->get('/p/{id}', function($id) use ($app) {
 })
 ->assert('id', '\w+');
 
-$app->get('/p/{id}/raw/{filename}', function($id, $filename) use ($app) {
+$app->get('/p/{id}/raw/{filename}', function ($id, $filename) use ($app) {
     $paste = $app['storage']->get($id);
 
     return new Response($paste->getContent(), 200, array(
@@ -102,7 +102,7 @@ $app->get('/p/{id}/raw/{filename}', function($id, $filename) use ($app) {
 ->assert('id', '\w+')
 ->value('filename', null);
 
-$app->get('/p/{id}/download', function($id) use ($app) {
+$app->get('/p/{id}/download', function ($id) use ($app) {
     $paste = $app['storage']->get($id);
 
     if (null == $filename = $paste->getFilename()) {
@@ -116,7 +116,7 @@ $app->get('/p/{id}/download', function($id) use ($app) {
 })
 ->assert('id', '\w+');
 
-$app->get('/p/{id}/dupe', function($id) use ($app) {
+$app->get('/p/{id}/dupe', function ($id) use ($app) {
     $paste = $app['storage']->get($id);
 
     $form = $app['form.factory']->createBuilder(new Form\Paste, $paste);
