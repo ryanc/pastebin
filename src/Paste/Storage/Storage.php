@@ -9,9 +9,15 @@ class Storage
 {
     private $db;
 
-    public function __construct(\Doctrine\DBAL\Connection $db)
+    private $logger;
+
+    public function __construct(
+        \Doctrine\DBAL\Connection $db,
+        \Monolog\Logger $logger
+    )
     {
         $this->db = $db;
+        $this->logger = $logger;
     }
 
     public function get($id)
@@ -128,6 +134,10 @@ class Storage
 
         if ($contentId !== false) {
             $contentId = (int) $contentId;
+
+            $this->logger->addDebug(sprintf(
+                "Found identical content at id %s", $contentId
+            ));
         }
 
         return $contentId;

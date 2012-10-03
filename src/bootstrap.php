@@ -36,7 +36,7 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 $app->register(new Silex\Provider\SessionServiceProvider);
 
 $app['storage'] = $app->share(function () use ($app) {
-    return new Paste\Storage\Storage($app['db']);
+    return new Paste\Storage\Storage($app['db'], $app['monolog']);
 });
 
 // Enable debug mode.
