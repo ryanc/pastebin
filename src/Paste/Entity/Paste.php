@@ -2,6 +2,9 @@
 
 namespace Paste\Entity;
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Paste
 {
     protected $id;
@@ -102,5 +105,10 @@ class Paste
     protected function trimContent($content)
     {
         return trim($content);
+    }
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('content', new Assert\NotBlank);
     }
 }

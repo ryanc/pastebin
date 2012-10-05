@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Paste\Form;
+use Paste\Entity;
 
 $app->get('/', function () use ($app) {
     // Redirect to /p/new.
@@ -129,3 +130,32 @@ $app->get('/p/{id}/dupe', function ($id) use ($app) {
     return $view;
 })
 ->assert('id', '\w+');
+
+$app->post('/api', function (Request $request) use ($app) {
+    $paste = new Entity\Paste();
+    $paste->setIp($request->getClientIp());
+    $paste->setContent($request->request->get('content'));
+
+    $errors = $app['validator']->validate($paste);
+
+    if (count($errors) > 0) {
+        $json = json_encode(array(
+            'message' => "Missing required paramters.",
+        ));
+
+        return new Response($json, 400, array(
+            'Content-Type' => 'application/json',
+        ));
+    }
+
+    $id = $app['storage']->save($paste);
+
+    $json = json_encode(array(
+        'url' => 'http://' . $request->getHttpHost() . '/p/' . $id,
+    ));
+    $json = str_replace('\/', '/', $json);
+
+    return new Response($json, 200, array(
+        'Content-Type' => 'application/json',
+    ));
+});
