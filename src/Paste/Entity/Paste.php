@@ -73,6 +73,11 @@ class Paste
         return $this->timestamp;
     }
 
+    public function getToken()
+    {
+        return $this->token;
+    }
+
     public function getFilename()
     {
         return $this->filename;
