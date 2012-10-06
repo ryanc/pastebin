@@ -88,7 +88,7 @@ class Paste
 
     public function getBinaryIp()
     {
-        if ($this->ip == null) { return ;}
+        if ($this->ip == null) { return; }
         
         return inet_pton($this->ip);
     }
