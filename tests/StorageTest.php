@@ -53,7 +53,7 @@ class StorageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($dbPaste->getFilename(), $paste->getFilename());
         $this->assertEquals($dbPaste->getDigest(), $paste->getDigest());
         $this->assertEquals($dbPaste->getIp(), $paste->getIp());
-        // $this->assertEquals($dbPaste->getTimestamp(), $paste->getTimestamp());
+        $this->assertEquals($dbPaste->getTimestamp(), $paste->getTimestamp());
     }
 
     public function testGetReturnsFalseIfNotInDatabase()

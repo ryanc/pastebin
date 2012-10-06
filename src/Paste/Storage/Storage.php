@@ -22,9 +22,9 @@ class Storage
 
     public function get($id)
     {
-        $sql = 'SELECT p.id, c.content, p.filename, p.token, p.timestamp, p.ip '
-             . 'FROM pastes p, paste_content c '
-             . 'WHERE p.content_id = c.id AND p.token = :token';
+        $sql = "SELECT p.id, c.content, p.filename, p.token, datetime(p.timestamp, 'unixepoch') AS timestamp, p.ip "
+             . "FROM pastes p, paste_content c "
+             . "WHERE p.content_id = c.id AND p.token = :token";
 
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':token', $id);
