@@ -53,8 +53,6 @@ class Paste
 
     public function setBinaryIp($ip)
     {
-        if ($this->ip == null) { return ;}
-
         $this->ip = inet_ntop($ip);
     }
 

@@ -57,6 +57,12 @@ class PasteTest extends \PHPUnit_Framework_TestCase
         $paste = new Paste;
         $paste->setIp('127.0.0.1');
         $this->assertEquals($binaryIp, $paste->getBinaryIp());
+
+        $paste = null;
+
+        $paste = new Paste;
+        $paste->setBinaryIp($binaryIp);
+        $this->assertEquals('127.0.0.1', $paste->getIp());
     }
 
     public function testDigest()
