@@ -17,4 +17,8 @@
     </blacklist>
   </filter>
 
+  <logging>
+    <log type="coverage-html" target="./web/report" />
+  </logging>
+
 </phpunit>
