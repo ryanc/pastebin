@@ -110,6 +110,9 @@ class Paste
         return trim($content);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('content', new Assert\NotBlank);

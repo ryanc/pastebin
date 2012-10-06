@@ -72,6 +72,11 @@ class PasteTest extends \PHPUnit_Framework_TestCase
         $paste = new Paste;
         $paste->setContent("Hello :)");
         $this->assertEquals($digest, $paste->getDigest());
+
+        $paste = null;
+
+        $paste = new Paste;
+        $this->assertNull($paste->getDigest());
     }
 
     public function testNormalizeContent()
