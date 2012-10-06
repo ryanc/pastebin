@@ -1,8 +1,10 @@
 <?php
 
+namespace Paste\Tests;
+
 use Paste\Math\Base62;
 
-class Base62Test extends PHPUnit_Framework_TestCase
+class Base62Test extends \PHPUnit_Framework_TestCase
 {
     protected $encoder;
 

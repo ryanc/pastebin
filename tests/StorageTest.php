@@ -1,9 +1,11 @@
 <?php
 
+namespace Paste\Tests;
+
 use Paste\Entity;
 use Paste\Storage;
 
-class StorageTest extends PHPUnit_Framework_TestCase
+class StorageTest extends \PHPUnit_Framework_TestCase
 {
     private $path;
 
