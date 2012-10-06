@@ -79,6 +79,13 @@ class PasteTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($paste->getDigest());
     }
 
+    public function testConvertTabs()
+    {
+        $paste = new Paste;
+        $paste->setConvertTabs(true);
+        $this->assertEquals(true, $paste->getConvertTabs());
+    }
+
     public function testNormalizeContent()
     {
         $paste = new Paste;
