@@ -98,4 +98,18 @@ class PasteTest extends \PHPUnit_Framework_TestCase
         $paste->setContent("Hello :)\n");
         $this->assertEquals("Hello :)", $paste->getContent());
     }
+
+    public function testTabsToSpaces()
+    {
+        $paste = new Paste;
+        $paste->setContent("Hello :)\tHello :)");
+        $paste->setConvertTabs(true);
+        $this->assertEquals("Hello :)    Hello :)", $paste->getContent());
+
+        $paste = null;
+
+        $paste = new Paste;
+        $paste->setContent("Hello :)\tHello :)");
+        $this->assertEquals("Hello :)\tHello :)", $paste->getContent());
+    }
 }

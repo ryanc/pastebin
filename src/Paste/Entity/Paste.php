@@ -19,6 +19,8 @@ class Paste
 
     protected $ip;
 
+    protected $convertTabs;
+
     public function setId($id)
     {
         $this->id = $id;
@@ -56,6 +58,11 @@ class Paste
         $this->ip = inet_ntop($ip);
     }
 
+    public function setConvertTabs($convert)
+    {
+        $this->convertTabs = $convert;
+    }
+
     public function getId()
     {
         return $this->id;
@@ -63,6 +70,10 @@ class Paste
 
     public function getContent()
     {
+        if ($this->convertTabs === true) {
+            $this->content = $this->tabsToSpaces($this->content);
+        }
+
         return $this->content;
     }
 
@@ -96,8 +107,13 @@ class Paste
     public function getDigest()
     {
         if (!empty($this->content)) {
-            return md5($this->content);
+            return md5($this->getContent());
         }
+    }
+
+    public function getConvertTabs()
+    {
+        return $this->convertTabs;
     }
 
     protected function normalizeContent($content)
@@ -108,6 +124,13 @@ class Paste
     protected function trimContent($content)
     {
         return trim($content);
+    }
+
+    protected function tabsToSpaces($content)
+    {
+        $spaces = str_repeat(' ', 4);
+
+        return preg_replace("#\t#", $spaces, $content);
     }
 
     /**

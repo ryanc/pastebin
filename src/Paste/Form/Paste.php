@@ -19,6 +19,10 @@ class Paste extends AbstractType
         $builder->add('filename', 'text', array(
             'required' => false,
         ));
+
+        $builder->add('convertTabs', 'checkbox', array(
+            'required' => false,
+        ));
     }
 
     public function getName()

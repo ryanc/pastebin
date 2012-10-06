@@ -11,10 +11,17 @@
 
   {{ form_widget(form._token) }}
 
-  <p class="right">
-    {{ form_widget(form.filename, { attr: {'placeholder': 'Optional filename ...'} }) }}
-    <button class="button-main" type="submit">Paste It</button>
-  </p>
+  <div class="right">
+      <p>
+        Convert tabs to spaces?
+        {{ form_widget(form.convertTabs, { attr: {'checked': 'checked' } }) }}
+      </p>
+
+      <p>
+        {{ form_widget(form.filename, { attr: {'placeholder': 'Optional filename ...'} }) }}
+        <button class="button-main" type="submit">Paste It</button>
+      </p>
+  </div>
 
 </form>
 {% endblock %}
