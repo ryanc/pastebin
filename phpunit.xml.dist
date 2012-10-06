@@ -10,6 +10,7 @@
 		</testsuite>
 	</testsuites>
 
+  <!-- Do not generate code coverage report on vendors directory. -->
   <filter>
     <blacklist>
       <directory suffix=".php">./vendor</directory>
