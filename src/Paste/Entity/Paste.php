@@ -31,7 +31,7 @@ class Paste
         );
     }
 
-    public function setTimestamp($timestamp)
+    public function setTimestamp(\DateTime $timestamp)
     {
         $this->timestamp = $timestamp;
     }

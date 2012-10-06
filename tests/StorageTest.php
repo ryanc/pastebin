@@ -39,7 +39,7 @@ class StorageTest extends \PHPUnit_Framework_TestCase
     {
         $paste = new Entity\Paste;
         $paste->setContent('This is a test.');
-        $paste->setTimestamp(time());
+        $paste->setTimestamp(new \DateTime);
         $paste->setFilename('test.txt');
         $paste->setIp('127.0.0.1');
 

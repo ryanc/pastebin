@@ -22,7 +22,7 @@ class PasteTest extends \PHPUnit_Framework_TestCase
 
     public function testTimestamp()
     {
-        $timestamp = time();
+        $timestamp = new \DateTime;
 
         $paste = new Paste;
         $paste->setTimestamp($timestamp);

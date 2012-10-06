@@ -45,7 +45,7 @@ class Storage
         $paste = new Paste();
         $paste->setId($result['id']);
         $paste->setContent($result['content']);
-        $paste->setTimestamp($result['timestamp']);
+        $paste->setTimestamp(new \DateTime($result['timestamp']));
         $paste->setToken($result['token']);
         $paste->setFilename($result['filename']);
         $paste->setBinaryIp($result['ip']);
