@@ -36,9 +36,6 @@ $app['storage'] = $app->share(function () use ($app) {
     return new Paste\Storage\Storage($app['db'], $app['monolog']);
 });
 
-// Enable debug mode.
-$app['debug'] = true;
-
 $app->error(function (\Exception $ex, $code) use ($app) {
     if ($code !== 404) {
         return;
@@ -50,5 +47,8 @@ $app->error(function (\Exception $ex, $code) use ($app) {
 
     return new Response($view, $code);
 });
+
+// Enable debug mode.
+$app['debug'] = true;
 
 return $app;
