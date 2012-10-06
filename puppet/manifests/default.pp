@@ -69,4 +69,8 @@ file {
         notify  => Service["php5-fpm"],
         require => Package["php5-fpm"],
     ;
+
+    "/etc/localtime":
+        source => "/usr/share/zoneinfo/America/Chicago",
+    ;
 }
