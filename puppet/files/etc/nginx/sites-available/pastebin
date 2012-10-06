@@ -10,7 +10,7 @@ server {
     error_log /vagrant/logs/error.log;
 
     root /vagrant/web;
-    index index.php;
+    index index.php index.html;
 
     server_name localhost;
 
