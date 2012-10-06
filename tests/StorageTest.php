@@ -14,7 +14,6 @@ class StorageTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $app = require __DIR__ . '/../src/app.php';
-        require __DIR__ . '/../src/bootstrap.php';
 
         $this->app = $app;
 
