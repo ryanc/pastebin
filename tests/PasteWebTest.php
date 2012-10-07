@@ -3,6 +3,7 @@
 namespace Paste\Tests;
 
 use Silex\WebTestCase;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class AppTest extends WebTestCase
 {
@@ -41,5 +42,27 @@ class AppTest extends WebTestCase
         $this->assertCount(1, $crawler->filterXPath("//form//input[contains(@type, 'text')]"));
         $this->assertCount(1, $crawler->filterXPath("//form//input[contains(@type, 'checkbox')]"));
         $this->assertCount(1, $crawler->filterXPath("//button"));
+    }
+
+    public function testPageNotFound()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/does-not-exist');
+
+        $this->assertTrue($client->getResponse()->isNotFound());
+    }
+
+    public function testMethodNotAllowed()
+    {
+        $client = $this->createClient();
+
+        try {
+            $crawler = $client->request('GET', '/api');
+        }
+        catch (MethodNotAllowedHttpException $ex) {
+            return;
+        }
+
+        $this->fail();
     }
 }
