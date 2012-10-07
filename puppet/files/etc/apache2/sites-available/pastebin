@@ -1,0 +1,20 @@
+<VirtualHost *:80>
+	EnableSendfile off
+
+	DocumentRoot /vagrant/web
+
+	<Directory /vagrant/web>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride all
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	ErrorLog /vagrant/logs/error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog /vagrant/logs/access.log combined
+</VirtualHost>
