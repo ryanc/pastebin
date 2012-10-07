@@ -23,7 +23,10 @@ Basic Setup
 5. Assign permissions to folders that need to be writable to the web
    server.
 
+        # For Debian/Ubuntu
         chown -R www-data cache logs db
+        # For Redhat/CentOS/Fedora
+        chown -R apache cache logs db
 
 6. Configure your web server. Sample configuration files are available
    for both [Apache](https://github.com/ryanc/pastebin/blob/master/puppet/files/etc/apache2/sites-available/pastebin) and [Nginx](https://github.com/ryanc/pastebin/blob/master/puppet/files/etc/nginx/sites-available/pastebin).
