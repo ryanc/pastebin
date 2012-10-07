@@ -8,6 +8,7 @@ $packages = [
     "php-apc",
     "git",
     "php5-cli",
+    "php5-xdebug",
 ]
 
 $dev_packages = [
