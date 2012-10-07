@@ -14,7 +14,8 @@
     "require-dev": {
         "phing/phing": "2.4.*",
         "phpunit/phpunit": "3.7.*",
-        "doctrine/migrations": "dev-master"
+        "doctrine/migrations": "dev-master",
+        "symfony/browser-kit": "2.1.*"
     },
     "autoload": {
         "psr-0": {
