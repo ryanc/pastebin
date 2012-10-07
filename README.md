@@ -1,7 +1,10 @@
+Pastebin
+========
+
 [![Build Status](https://secure.travis-ci.org/ryanc/pastebin.png)](http://travis-ci.org/ryanc/pastebin)
 
 Basic Setup
-===========
+-----------
 
 1. Check out the source code.
 
@@ -32,7 +35,7 @@ Basic Setup
    for both [Apache](https://github.com/ryanc/pastebin/blob/master/puppet/files/etc/apache2/sites-available/pastebin) and [Nginx](https://github.com/ryanc/pastebin/blob/master/puppet/files/etc/nginx/sites-available/pastebin).
 
 Quick Setup
-===========
+-----------
 
 This setup is ideal for development since it uses the vagrant
 configuration that has been committed to this Git repository. This
