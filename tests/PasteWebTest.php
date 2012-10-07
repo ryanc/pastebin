@@ -65,4 +65,22 @@ class AppTest extends WebTestCase
 
         $this->fail();
     }
+
+    public function testPasteHistory()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/p/history');
+
+        $this->assertTrue($client->getResponse()->isOk());
+        $this->assertCount(1, $crawler->filterXPath("//h3"));
+    }
+
+    public function testClearPasteHistory()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/p/history/clear');
+
+        $this->assertTrue($client->getResponse()->isOk());
+        $this->assertCount(1, $crawler->filterXPath("//h3"));
+    }
 }
