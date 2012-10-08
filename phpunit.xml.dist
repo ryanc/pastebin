@@ -12,9 +12,9 @@
 
   <!-- Do not generate code coverage report on vendors directory. -->
   <filter>
-    <blacklist>
-      <directory suffix=".php">./vendor</directory>
-    </blacklist>
+    <whitelist>
+      <directory suffix=".php">./src</directory>
+    </whitelist>
   </filter>
 
   <logging>
