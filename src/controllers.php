@@ -141,7 +141,7 @@ $app->post('/api', function (Request $request) use ($app) {
     if (count($errors) > 0) {
         $json = json_encode(array(
             'success' => false,
-            'message' => "Missing required paramters.",
+            'message' => "Missing required parameters.",
         ));
 
         return new Response($json, 400, array(
@@ -153,7 +153,7 @@ $app->post('/api', function (Request $request) use ($app) {
 
     $json = json_encode(array(
         'success' => true,
-        'url' => 'http://' . $request->getHttpHost() . '/p/' . $id,
+        'url'     => 'http://' . $request->getHttpHost() . '/p/' . $id,
     ));
     $json = str_replace('\/', '/', $json);
 
