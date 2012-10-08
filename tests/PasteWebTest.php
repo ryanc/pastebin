@@ -100,6 +100,9 @@ class AppTest extends WebTestCase
         ));
 
         $this->assertTrue($client->getResponse()->isOk());
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+        $this->assertTrue($content['success']);
     }
 
     public function testApiFailure()
@@ -111,5 +114,8 @@ class AppTest extends WebTestCase
 
         $this->assertFalse($client->getResponse()->isOk());
         $this->assertEquals(400, $client->getResponse()->getStatusCode());
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+        $this->assertFalse($content['success']);
     }
 }
