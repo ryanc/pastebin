@@ -14,7 +14,15 @@ class AppTest extends WebTestCase
         unset($app['exception_handler']);
 
         $app['monolog.logfile'] = '/tmp/pastebin.log';
+
         $app['session.test'] = true;
+
+        $app['db.options'] = array(
+            'driver' => 'pdo_sqlite',
+            'path'   => ':memory:',
+        );
+
+        $app['db']->exec(file_get_contents(__DIR__ . '/../sql/schema.sql'));
 
         /* Import the controllers or else none of the routes will be 
            found. */
@@ -82,5 +90,26 @@ class AppTest extends WebTestCase
 
         $this->assertTrue($client->getResponse()->isOk());
         $this->assertCount(1, $crawler->filterXPath("//h3"));
+    }
+
+    public function testApiSuccess()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('POST', '/api', array(
+            'content' => 'Hello :)',
+        ));
+
+        $this->assertTrue($client->getResponse()->isOk());
+    }
+
+    public function testApiFailure()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('POST', '/api', array(
+            'unicorn' => 'Hello :)',
+        ));
+
+        $this->assertFalse($client->getResponse()->isOk());
+        $this->assertEquals(400, $client->getResponse()->getStatusCode());
     }
 }
