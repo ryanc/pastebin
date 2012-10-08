@@ -19,8 +19,10 @@ class AppTest extends WebTestCase
 
         $app['db.options'] = array(
             'driver' => 'pdo_sqlite',
-            'path'   => ':memory:',
+            'path'   => '/tmp/pastebin.db',
         );
+
+        $app['twig.options'] = array('cache' => __DIR__ . '/tmp/twig');
 
         $app['db']->exec(file_get_contents(__DIR__ . '/../sql/schema.sql'));
 
@@ -29,6 +31,11 @@ class AppTest extends WebTestCase
         require __DIR__ . '/../src/controllers.php';
 
         return $app;
+    }
+
+    public function tearDown()
+    {
+        @unlink('/tmp/pastebin.db');
     }
 
     public function testInitialPage()
@@ -50,6 +57,42 @@ class AppTest extends WebTestCase
         $this->assertCount(1, $crawler->filterXPath("//form//input[contains(@type, 'text')]"));
         $this->assertCount(1, $crawler->filterXPath("//form//input[contains(@type, 'checkbox')]"));
         $this->assertCount(1, $crawler->filterXPath("//button"));
+    }
+
+    public function testNewPaste()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/p/new');
+
+        $form = $crawler->selectButton('submit')->form();
+        $crawler = $client->submit($form, array(
+            'paste[content]'     => 'Hello :)',
+            'paste[filename]'    => 'test.txt',
+            'paste[convertTabs]' => '1',
+        ));
+
+        $this->assertTrue($client->getResponse()->isRedirect('/p/1'));
+
+        $crawler = $client->request('GET', '/p/1');
+
+        $this->assertCount(1, $crawler->filterXPath("//code"));
+        $this->assertEquals('Hello :)', $crawler->filterXPath("//code")->text());
+    }
+
+    public function testNewPasteWithNullContent()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/p/new');
+
+        $form = $crawler->selectButton('submit')->form();
+        $crawler = $client->submit($form, array(
+            'paste[content]'     => null,
+            'paste[filename]'    => 'test.txt',
+            'paste[convertTabs]' => '1',
+        ));
+
+        $this->assertTrue($client->getResponse()->isOk());
+        $this->assertFalse($client->getResponse()->isRedirect());
     }
 
     public function testPageNotFound()
@@ -140,5 +183,62 @@ class AppTest extends WebTestCase
 
         $this->assertFalse($client->getResponse()->isOk());
         $this->assertTrue($client->getResponse()->isNotFound());
+    }
+
+    public function testGetRawPaste()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('POST', '/api', array(
+            'content' => 'Hello :)',
+        ));
+
+        $crawler = $client->request('GET', '/p/1/raw');
+
+        $this->assertTrue($client->getResponse()->isOk());
+        $this->assertEquals('Hello :)', $client->getResponse()->getContent());
+    }
+
+    public function testDuplicatePaste()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/p/new');
+
+        $form = $crawler->selectButton('submit')->form();
+        $crawler = $client->submit($form, array(
+            'paste[content]'     => 'Hello :)',
+            'paste[filename]'    => 'test.txt',
+            'paste[convertTabs]' => '1',
+        ));
+
+        $this->assertTrue($client->getResponse()->isRedirect('/p/1'));
+
+        $crawler = $client->request('GET', '/p/1');
+
+        $this->assertCount(1, $crawler->filterXPath("//code"));
+        $this->assertEquals('Hello :)', $crawler->filterXPath("//code")->text());
+
+        $crawler = $client->request('GET', '/p/1/dupe');
+
+        $form = $crawler->selectButton('submit')->form();
+        $crawler = $client->submit($form);
+
+        $crawler = $client->request('GET', '/p/1');
+
+        $this->assertCount(1, $crawler->filterXPath("//code"));
+        $this->assertEquals('Hello :)', $crawler->filterXPath("//code")->text());
+    }
+
+    public function testDownloadPaste()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('POST', '/api', array(
+            'content' => 'Hello :)',
+        ));
+
+        $this->assertTrue($client->getResponse()->isOk());
+
+        $crawler = $client->request('GET', '/p/1/download');
+
+        $this->assertTrue($client->getResponse()->isOk());
     }
 }
