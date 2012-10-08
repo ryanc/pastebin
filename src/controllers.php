@@ -135,6 +135,7 @@ $app->post('/api', function (Request $request) use ($app) {
     $paste = new Entity\Paste();
     $paste->setIp($request->getClientIp());
     $paste->setContent($request->request->get('content'));
+    $paste->setFilename($request->request->get('filename'));
 
     $errors = $app['validator']->validate($paste);
 

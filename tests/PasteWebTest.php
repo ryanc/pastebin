@@ -139,7 +139,8 @@ class AppTest extends WebTestCase
     {
         $client = $this->createClient();
         $crawler = $client->request('POST', '/api', array(
-            'content' => 'Hello :)',
+            'content'  => 'Hello :)',
+            'filename' => 'test.txt',
         ));
 
         $this->assertTrue($client->getResponse()->isOk());
