@@ -118,4 +118,27 @@ class AppTest extends WebTestCase
         $content = json_decode($client->getResponse()->getContent(), true);
         $this->assertFalse($content['success']);
     }
+
+    public function testGetPaste()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('POST', '/api', array(
+            'content' => 'Hello :)',
+        ));
+
+        $crawler = $client->request('GET', '/p/1');
+
+        $this->assertTrue($client->getResponse()->isOk());
+        $this->assertCount(1, $crawler->filterXPath("//code"));
+        $this->assertEquals('Hello :)', $crawler->filterXPath("//code")->text());
+    }
+
+    public function testPasteNotFound()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/p/1');
+
+        $this->assertFalse($client->getResponse()->isOk());
+        $this->assertTrue($client->getResponse()->isNotFound());
+    }
 }
