@@ -2,24 +2,73 @@
 
 {% block css %}
 {{ parent() }}
-<link type="text/css" rel="stylesheet" href="/css/themes/ir_black.css">
+<link type="text/css" rel="stylesheet" href="/css/themes/ir_black.css" class="theme">
 <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Code+Pro">
 {% endblock %}
 
 {% block javascript %}
 <script src="/js/zepto.min.js"></script>
+<script src="/js/zepto.cookie.min.js"></script>
 <script src="/js/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 {% endblock %}
 
 {% block content %}
+<script>
+$(document).ready(function() {
+  if ($.fn.cookie("theme")) {
+    theme = $.fn.cookie("theme");
+    $("link.theme").attr("href", "/css/themes/" + theme);
+  }
+
+  $(".theme-switcher").change(function() {
+    theme = $(this).val();
+    $("link.theme").attr("href", "/css/themes/" + theme);
+    $.fn.cookie("theme", theme);
+  });
+});
+</script>
+<div>
+  <div class="left">
+    <label>Theme:</label>
+    <select class="theme-switcher">
+      <option value="arta.css">Arta</option>
+      <option value="ascetic.css">Ascetic</option>
+      <option value="brown_paper.css">Brown Paper</option>
+      <option value="dark.css">Dark</option>
+      <option value="default.css">Default</option>
+      <option value="far.css">FAR</option>
+      <option value="github.css">GitHub</option>
+      <option value="googlecode.css">Google Code</option>
+      <option value="idea.css">IDEA</option>
+      <option value="ir_black.css">IR Black</option>
+      <option value="magula.css">Magula</option>
+      <option value="monokai.css">Monokai</option>
+      <option value="pojoaque.css">Pojoaque</option>
+      <option value="rainbow.css">Rainbow</option>
+      <option value="school_book.css">School Book</option>
+      <option value="solarized_dark.css">Solarized Dark</option>
+      <option value="solarized_light.css">Solarized Light</option>
+      <option value="sunburst.css">Sunburst</option>
+      <option value="tomorrow-night-blue.css">Tomorrow Night Blue</option>
+      <option value="tomorrow-night-bright.css">Tomorrow Night Bright</option>
+      <option value="tomorrow-night-eighties.css">Tomorrow Night Eighties</option>
+      <option value="tomorrow-night.css">Tomorrow Night</option>
+      <option value="tomorrow.css">Tomorrow</option>
+      <option value="vs.css">Visual Studio</option>
+      <option value="xcode.css">XCode</option>
+      <option value="zenburn.css">Zenburn</option>
+    </select>
+  </div>
+  <ul id="pasteOptions">
+    <li><a href="/p/{{ id | e }}/raw">Raw</a></li>
+    <li><a href="/p/{{ id | e }}/download">Download</a></li>
+    <li><a href="/p/{{ id | e }}/dupe">Dupe</a></li>
+  </ul>
+</div>
+<div class="clear"></div>
 <div class="paste">
   <pre><code>{{ paste.content | e }}</code></pre>
 </div>
 <!-- Digest: {{ paste.digest }} -->
-<ul id="pasteOptions">
-  <li><a href="/p/{{ id | e }}/raw">Raw</a></li>
-  <li><a href="/p/{{ id | e }}/download">Download</a></li>
-  <li><a href="/p/{{ id | e }}/dupe">Dupe</a></li>
-</ul>
 {% endblock %}

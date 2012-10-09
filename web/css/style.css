@@ -70,6 +70,7 @@ pre code {
   overflow: auto;
   font-family: "Source Code Pro", monospace;
   font-size: 14px;
+  margin: 10px 0;
 }
 #top-bar {
   background-color: #444;
@@ -113,7 +114,7 @@ pre code {
   padding: 10px;
 }
 .left {
-  float: right;
+  float: left;
 }
 .right {
   float: right;
@@ -186,23 +187,17 @@ button:active {
   width: 300px;
 }
 #pasteOptions {
-  position: fixed;
-  bottom: 1em;
-  right: 1em;
+  float: right;
   margin: 0;
 }
 #pasteOptions li {
   float: left;
-  padding: 0 5px;
+  padding: 0 10px;
   list-style: none;
 }
 #pasteOptions li a {
-  display: inline-block;
   color: #4183c4;
   text-decoration: none;
-  border-radius: 8px;
-  background-color: #f2f2f2;
-  padding: 5px;
 }
 .errorMessage {
   color: #990000;
