@@ -75,3 +75,8 @@ file {
         source => "/usr/share/zoneinfo/America/Chicago",
     ;
 }
+
+exec { "update-alternatives":
+    command   => "/usr/sbin/update-alternatives --set editor /usr/bin/vim.basic",
+    subscribe => Package["vim"],
+}
