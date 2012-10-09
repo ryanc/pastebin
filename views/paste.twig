@@ -1,5 +1,17 @@
 {% extends "layout.twig" %}
 
+{% block css %}
+{{ parent() }}
+<link type="text/css" rel="stylesheet" href="/css/ir_black.css">
+<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Code+Pro">
+{% endblock %}
+
+{% block javascript %}
+<script src="/js/zepto.min.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{% endblock %}
+
 {% block content %}
 <div class="paste">
   <pre><code>{{ paste.content | e }}</code></pre>
