@@ -227,7 +227,7 @@ class AppTest extends WebTestCase
         $this->assertCount(1, $crawler->filterXPath("//code"));
         $this->assertEquals('Hello :)', $crawler->filterXPath("//code")->text());
 
-        $crawler = $client->request('GET', '/p/1/dupe');
+        $crawler = $client->request('GET', '/p/1/clone');
 
         $form = $crawler->selectButton('submit')->form();
         $crawler = $client->submit($form);

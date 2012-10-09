@@ -119,7 +119,7 @@ $app->get('/p/{id}/download', function ($id) use ($app) {
 })
 ->assert('id', '\w+');
 
-$app->get('/p/{id}/dupe', function ($id) use ($app) {
+$app->get('/p/{id}/clone', function ($id) use ($app) {
     $paste = $app['storage']->get($id);
 
     $form = $app['form.factory']->createBuilder(new Form\Paste, $paste);
