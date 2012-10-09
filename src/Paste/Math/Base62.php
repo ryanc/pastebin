@@ -104,6 +104,7 @@ class Base62
      *
      * @param string $num
      * @return string
+     * @codeCoverageIgnore
      */
     private function bcfloor($num)
     {

@@ -79,7 +79,9 @@ $app->get('/p/{id}', function ($id) use ($app) {
 
     if ($paste === false) {
         $app->abort(404, 'This paste does not exist yet.');
+    // @codeCoverageIgnoreStart
     }
+    // @codeCoverageIgnoreEnd
 
     $view = $app['twig']->render('paste.twig', array(
         'paste' => $paste,

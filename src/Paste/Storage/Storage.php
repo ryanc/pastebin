@@ -33,7 +33,9 @@ class Storage
 
         // The statement failed to execute.
         if (false === $stmt->execute()) {
+            // @codeCoverageIgnoreStart
             throw new \RuntimeException('SQL statement failed to execute.');
+            // @codeCoverageIgnoreEnd
         }
 
         // There are no results.
@@ -143,11 +145,17 @@ class Storage
         return $contentId;
     }
 
-    public function close()
+    /**
+     * @codeCoverageIgnore
+     */
+    protected function close()
     {
         $this->db = null;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function __destruct()
     {
         $this->close();
