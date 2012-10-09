@@ -19,6 +19,7 @@ $(document).ready(function() {
   if ($.fn.cookie("theme")) {
     theme = $.fn.cookie("theme");
     $("link.theme").attr("href", "/css/themes/" + theme);
+    $(".theme-switcher").val(theme);
   }
 
   $(".theme-switcher").change(function() {
