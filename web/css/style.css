@@ -54,6 +54,38 @@ h3 {
 a {
   color: #195ecf;
 }
+.smooth-button {
+  background-color: #f2f2f2;
+  background-image: -moz-linear-gradient(top center, #ffffff, #f2f2f2);
+  background-image: -ms-linear-gradient(top center, #ffffff, #f2f2f2);
+  background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#ffffff), to(#f2f2f2));
+  background-image: -webkit-linear-gradient(top center, #ffffff, #f2f2f2);
+  background-image: -o-linear-gradient(top center, #ffffff, #f2f2f2);
+  background-image: linear-gradient(top center, #ffffff, #f2f2f2);
+  background-repeat: repeat-x;
+  border: 1px solid #ccc;
+  border-radius: 3px 3px 3px 3px;
+  color: #333;
+  cursor: pointer;
+  padding: 4px 10px;
+}
+.smooth-button:hover {
+  background-color: #f2f2f2;
+  background-image: -moz-linear-gradient(top center, #ffffff, #f2f2f2);
+  background-image: -ms-linear-gradient(top center, #ffffff, #f2f2f2);
+  background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#ffffff), to(#f2f2f2));
+  background-image: -webkit-linear-gradient(top center, #ffffff, #f2f2f2);
+  background-image: -o-linear-gradient(top center, #ffffff, #f2f2f2);
+  background-image: linear-gradient(top center, #ffffff, #f2f2f2);
+  background-repeat: repeat-x;
+  background: #fff;
+  border-color: #999;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1) inset;
+}
+.smooth-button:active {
+  background-color: #F2F2F2;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1) inset;
+}
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -192,7 +224,7 @@ button:active {
 }
 #pasteOptions li {
   float: left;
-  padding: 0 10px;
+  padding: 0 5px;
   list-style: none;
 }
 #pasteOptions li a {
