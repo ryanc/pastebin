@@ -58,7 +58,7 @@ a {
   background-color: #f2f2f2;
   background-image: -moz-linear-gradient(top center, #ffffff, #f2f2f2);
   background-image: -ms-linear-gradient(top center, #ffffff, #f2f2f2);
-  background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#ffffff), to(#f2f2f2));
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
   background-image: -webkit-linear-gradient(top center, #ffffff, #f2f2f2);
   background-image: -o-linear-gradient(top center, #ffffff, #f2f2f2);
   background-image: linear-gradient(top center, #ffffff, #f2f2f2);
@@ -70,13 +70,13 @@ a {
   padding: 4px 10px;
 }
 .smooth-button:hover {
-  background-color: #f2f2f2;
-  background-image: -moz-linear-gradient(top center, #ffffff, #f2f2f2);
-  background-image: -ms-linear-gradient(top center, #ffffff, #f2f2f2);
-  background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#ffffff), to(#f2f2f2));
-  background-image: -webkit-linear-gradient(top center, #ffffff, #f2f2f2);
-  background-image: -o-linear-gradient(top center, #ffffff, #f2f2f2);
-  background-image: linear-gradient(top center, #ffffff, #f2f2f2);
+  background-color: #f7f7f7;
+  background-image: -moz-linear-gradient(top center, #ffffff, #f7f7f7);
+  background-image: -ms-linear-gradient(top center, #ffffff, #f7f7f7);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f7f7f7));
+  background-image: -webkit-linear-gradient(top center, #ffffff, #f7f7f7);
+  background-image: -o-linear-gradient(top center, #ffffff, #f7f7f7);
+  background-image: linear-gradient(top center, #ffffff, #f7f7f7);
   background-repeat: repeat-x;
   background: #fff;
   border-color: #999;
