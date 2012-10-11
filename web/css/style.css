@@ -2,7 +2,7 @@
   background-color: #70db64;
   background-image: -moz-linear-gradient(top center, #9de691, #70db64);
   background-image: -ms-linear-gradient(top center, #9de691, #70db64);
-  background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#9de691), to(#70db64));
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#9de691), to(#70db64));
   background-image: -webkit-linear-gradient(top center, #9de691, #70db64);
   background-image: -o-linear-gradient(top center, #9de691, #70db64);
   background-image: linear-gradient(top center, #9de691, #70db64);
@@ -20,7 +20,7 @@
   background-color: #949494;
   background-image: -moz-linear-gradient(top center, #b7b7b7, #949494);
   background-image: -ms-linear-gradient(top center, #b7b7b7, #949494);
-  background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#b7b7b7), to(#949494));
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#b7b7b7), to(#949494));
   background-image: -webkit-linear-gradient(top center, #b7b7b7, #949494);
   background-image: -o-linear-gradient(top center, #b7b7b7, #949494);
   background-image: linear-gradient(top center, #b7b7b7, #949494);
