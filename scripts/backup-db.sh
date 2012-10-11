@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VHOST_DIR="/www/paste.confabulator.net"
+VHOST_DIR="/www/p.confabulator.net"
 DB="pastebin.db"
 DB_PATH="$VHOST_DIR/db/$DB"
 TIMESTAMP=`date +%s`
