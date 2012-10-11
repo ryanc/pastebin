@@ -3,3 +3,5 @@ db/*
 logs/*.log
 vendor/*
 composer.phar*
+backups/*
+logs/*
