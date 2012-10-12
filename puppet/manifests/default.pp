@@ -2,7 +2,7 @@ $packages = [
     "vim",
     "sqlite3",
     "curl",
-    "nginx-light",
+    "nginx",
     "php5-fpm",
     "php5-sqlite",
     "php-apc",
@@ -47,7 +47,7 @@ service { $services:
 file {
     "/etc/nginx/sites-enabled/default":
         ensure    => absent,
-        subscribe => Package["nginx-light"],
+        subscribe => Package["nginx"],
     ;
 
     "/etc/nginx/sites-available/pastebin":
@@ -56,7 +56,7 @@ file {
             File["/etc/nginx/sites-enabled/pastebin"],
             Service["nginx"]
         ],
-        require => Package["nginx-light"],
+        require => Package["nginx"],
     ;
 
     "/etc/nginx/sites-enabled/pastebin":
