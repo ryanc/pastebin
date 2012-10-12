@@ -19,12 +19,7 @@ class StorageTest extends \PHPUnit_Framework_TestCase
 
         $this->app = $app;
 
-        $app['db.options'] = array(
-            'driver' => 'pdo_sqlite',
-            'path'   => ':memory:',
-        );
-
-        $schema = file_get_contents(__DIR__ . "/../sql/schema.sql");
+        $schema = file_get_contents($app['pastebin.schema']);
 
         $this->db = $app['db'];
         $this->db->exec($schema);

@@ -7,44 +7,19 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class AppTest extends WebTestCase
 {
-    private static $tempDir;
-
-    public static function setUpBeforeClass()
-    {
-        self::$tempDir = exec('mktemp -d');
-    }
-
     public function createApplication()
     {
         $app = require __DIR__ . '/../src/app.php';
         $app['debug'] = true;
         unset($app['exception_handler']);
 
-        $tempDir = self::$tempDir;
-
-        $app['monolog.logfile'] = $tempDir . '/pastebin.log';
-
-        $app['session.test'] = true;
-
-        $app['db.options'] = array(
-            'driver' => 'pdo_sqlite',
-            'path'   => $tempDir . '/pastebin.db',
-        );
-
-        $app['twig.options'] = array('cache' => $tempDir . '/twig');
-
-        $app['db']->exec(file_get_contents(__DIR__ . '/../sql/schema.sql'));
+        $app['db']->exec(file_get_contents($app['pastebin.schema']));
 
         /* Import the controllers or else none of the routes will be 
            found. */
         require __DIR__ . '/../src/controllers.php';
 
         return $app;
-    }
-
-    public function tearDown()
-    {
-        @unlink(self::$tempDir . '/pastebin.db');
     }
 
     public function testInitialPage()
