@@ -1,15 +1,2 @@
 {
-    "debug": false,
-
-    "db.options": {
-        "driver": "pdo_sqlite",
-        "path": "%pwd%/db/pastebin.db"
-    },
-
-    "twig.path": "%pwd%/views",
-    "twig.options": {
-        "cache": "%pwd%/cache/twig"
-    },
-
-    "monolog.logfile": "%pwd%/logs/pastebin.log"
 }

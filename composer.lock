@@ -1,5 +1,5 @@
 {
-    "hash": "55dd66a088b87a0b510750eb9e47469a",
+    "hash": "e4ead4a947de815c9e1ad7c63e7b7661",
     "packages": [
         {
             "name": "doctrine/common",
@@ -135,35 +135,35 @@
         },
         {
             "name": "igorw/config-service-provider",
-            "version": "v1.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/igorw/ConfigServiceProvider",
-                "reference": "v1.0.0"
+                "reference": "ca8b3710cc3a6a397ec42d8163766920e90c920a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/igorw/ConfigServiceProvider/zipball/v1.0.0",
-                "reference": "v1.0.0",
+                "url": "https://github.com/igorw/ConfigServiceProvider/zipball/ca8b3710cc3a6a397ec42d8163766920e90c920a",
+                "reference": "ca8b3710cc3a6a397ec42d8163766920e90c920a",
                 "shasum": ""
             },
             "require": {
-                "silex/silex": "1.0.*@dev"
+                "silex/silex": "1.0.*"
             },
             "require-dev": {
-                "symfony/yaml": "2.1.*@dev"
+                "symfony/yaml": "2.1.*"
             },
             "suggest": {
                 "symfony/yaml": "2.1.*"
             },
-            "time": "2012-07-14 00:12:34",
+            "time": "1346280316",
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0"
-                }
+                "branch-alias": [
+
+    ]
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Igorw\\Silex": "src"
@@ -1082,6 +1082,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "silex/silex": 20,
+        "igorw/config-service-provider": 20,
         "doctrine/migrations": 20
     }
 }

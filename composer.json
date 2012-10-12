@@ -10,7 +10,7 @@
         "monolog/monolog": "1.*",
         "symfony/console": "2.1.*",
         "doctrine/dbal": "2.3.*",
-        "igorw/config-service-provider": "1.0.*"
+        "igorw/config-service-provider": "@dev"
     },
     "require-dev": {
         "phing/phing": "2.4.*",

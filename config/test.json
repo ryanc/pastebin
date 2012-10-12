@@ -1,18 +1,2 @@
 {
-    "debug": true,
-
-    "db.options": {
-        "driver": "pdo_sqlite",
-        "path": ":memory:"
-    },
-
-    "twig.path": "%pwd%/views",
-    "twig.options": {
-    },
-
-    "monolog.logfile": "php://memory",
-
-    "pastebin.schema": "%pwd%/sql/schema.sql",
-
-    "session.test": true
 }
