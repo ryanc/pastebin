@@ -21,4 +21,8 @@
     <log type="coverage-html" target="./web/report" />
   </logging>
 
+  <php>
+    <env name="APP_ENV" value="test" />
+  </php>
+
 </phpunit>

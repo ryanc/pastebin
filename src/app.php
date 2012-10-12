@@ -37,6 +37,11 @@ $app['storage'] = $app->share(function () use ($app) {
     return new Paste\Storage\Storage($app['db'], $app['monolog']);
 });
 
+$env = getenv('APP_ENV') ?: 'prod';
+$app->register(new Igorw\Silex\ConfigServiceProvider(
+    __DIR__ . "/../config/$env.json"
+));
+
 $app->error(function (\Exception $ex, $code) use ($app) {
     if ($code !== 404) {
         return;
@@ -48,8 +53,5 @@ $app->error(function (\Exception $ex, $code) use ($app) {
 
     return new Response($view, $code);
 });
-
-// Enable debug mode.
-$app['debug'] = true;
 
 return $app;
