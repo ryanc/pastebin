@@ -21,6 +21,8 @@ class Paste
 
     protected $convertTabs;
 
+    protected $highlight = true;
+
     public function setId($id)
     {
         $this->id = $id;
@@ -61,6 +63,11 @@ class Paste
     public function setConvertTabs($convert)
     {
         $this->convertTabs = $convert;
+    }
+
+    public function setHighlight($highlight)
+    {
+        $this->highlight = (bool) $highlight;
     }
 
     public function getId()
@@ -114,6 +121,11 @@ class Paste
     public function getConvertTabs()
     {
         return $this->convertTabs;
+    }
+
+    public function getHighlight()
+    {
+        return $this->highlight;
     }
 
     protected function normalizeContent($content)

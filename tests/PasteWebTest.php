@@ -39,7 +39,7 @@ class AppTest extends WebTestCase
         $this->assertCount(1, $crawler->filterXPath("//form"));
         $this->assertCount(1, $crawler->filterXPath("//form/textarea"));
         $this->assertCount(1, $crawler->filterXPath("//form//input[contains(@type, 'text')]"));
-        $this->assertCount(1, $crawler->filterXPath("//form//input[contains(@type, 'checkbox')]"));
+        $this->assertCount(2, $crawler->filterXPath("//form//input[contains(@type, 'checkbox')]"));
         $this->assertCount(1, $crawler->filterXPath("//button"));
     }
 
@@ -53,6 +53,7 @@ class AppTest extends WebTestCase
             'paste[content]'     => 'Hello :)',
             'paste[filename]'    => 'test.txt',
             'paste[convertTabs]' => '1',
+            'paste[highlight]'   => '1',
         ));
 
         $this->assertTrue($client->getResponse()->isRedirect('/p/1'));
@@ -73,6 +74,7 @@ class AppTest extends WebTestCase
             'paste[content]'     => null,
             'paste[filename]'    => 'test.txt',
             'paste[convertTabs]' => '1',
+            'paste[highlight]'   => '1',
         ));
 
         $this->assertTrue($client->getResponse()->isOk());
@@ -193,6 +195,7 @@ class AppTest extends WebTestCase
             'paste[content]'     => 'Hello :)',
             'paste[filename]'    => 'test.txt',
             'paste[convertTabs]' => '1',
+            'paste[highlight]'   => '1',
         ));
 
         $this->assertTrue($client->getResponse()->isRedirect('/p/1'));
@@ -225,5 +228,49 @@ class AppTest extends WebTestCase
         $crawler = $client->request('GET', '/p/1/download');
 
         $this->assertTrue($client->getResponse()->isOk());
+    }
+
+    public function testPasteWithHighlighting()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/p/new');
+
+        $form = $crawler->selectButton('submit')->form();
+        $crawler = $client->submit($form, array(
+            'paste[content]'     => 'Hello :)',
+            'paste[filename]'    => 'test.txt',
+            'paste[convertTabs]' => '1',
+            'paste[highlight]'   => true,
+        ));
+
+        $this->assertTrue($client->getResponse()->isRedirect('/p/1'));
+
+        $crawler = $client->request('GET', '/p/1');
+
+        $this->assertCount(1, $crawler->filterXPath("//code"));
+        $this->assertCount(0, $crawler->filterXPath("//code[contains(@class, 'no-highlight')]"));
+        $this->assertEquals('Hello :)', $crawler->filterXPath("//code")->text());
+    }
+
+    public function testPasteWithoutHighlighting()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/p/new');
+
+        $form = $crawler->selectButton('submit')->form();
+        $crawler = $client->submit($form, array(
+            'paste[content]'     => 'Hello :)',
+            'paste[filename]'    => 'test.txt',
+            'paste[convertTabs]' => '1',
+            'paste[highlight]'   => false,
+        ));
+
+        $this->assertTrue($client->getResponse()->isRedirect('/p/1'));
+
+        $crawler = $client->request('GET', '/p/1');
+
+        $this->assertCount(1, $crawler->filterXPath("//code"));
+        $this->assertCount(1, $crawler->filterXPath("//code[contains(@class, 'no-highlight')]"));
+        $this->assertEquals('Hello :)', $crawler->filterXPath("//code")->text());
     }
 }

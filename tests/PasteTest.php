@@ -86,6 +86,16 @@ class PasteTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, $paste->getConvertTabs());
     }
 
+    public function testHighlight()
+    {
+        $paste = new Paste;
+        $this->assertEquals(true, $paste->getHighlight());
+        $paste->setHighlight(true);
+        $this->assertEquals(true, $paste->getHighlight());
+        $paste->setHighlight(false);
+        $this->assertEquals(false, $paste->getHighlight());
+    }
+
     public function testNormalizeContent()
     {
         $paste = new Paste;

@@ -23,6 +23,10 @@ class Paste extends AbstractType
         $builder->add('convertTabs', 'checkbox', array(
             'required' => false,
         ));
+
+        $builder->add('highlight', 'checkbox', array(
+            'required' => false,
+        ));
     }
 
     public function getName()

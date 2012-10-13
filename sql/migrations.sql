@@ -1,5 +1,5 @@
--- Doctrine Migration File Generated on 2012-09-29 21:09:34
--- Migrating from 0 to 20120929184739
+-- Doctrine Migration File Generated on 2012-10-13 15:10:06
+-- Migrating from 0 to 20121013121601
 
 -- Version 20120820212620
 CREATE TABLE pastes (id INTEGER PRIMARY KEY NOT NULL, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, paste TEXT NOT NULL, token VARCHAR(50), filename VARCHAR(100));
@@ -17,3 +17,7 @@ DROP TABLE pastes;
 CREATE TABLE pastes (id INTEGER PRIMARY KEY NOT NULL, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, token VARCHAR(50), filename VARCHAR(100), ip BLOB(16), content_id INTEGER, FOREIGN KEY(content_id) REFERENCES paste_content(id));
 INSERT INTO pastes SELECT * FROM pastes__tmp;
 DROP TABLE pastes__tmp;
+
+-- Version 20121013121601
+ALTER TABLE pastes ADD COLUMN highlight BOOLEAN;
+UPDATE pastes SET highlight = 1;

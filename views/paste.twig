@@ -69,7 +69,11 @@ $(document).ready(function() {
 </div>
 <div class="clear"></div>
 <div class="paste">
+  {% if paste.highlight %}
   <pre><code>{{ paste.content | e }}</code></pre>
+  {% else %}
+  <pre><code class="no-highlight">{{ paste.content | e }}</code></pre>
+  {% endif %}
 </div>
 <!-- Digest: {{ paste.digest }} -->
 {% endblock %}

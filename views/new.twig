@@ -13,6 +13,11 @@
 
   <div class="right">
       <p>
+        Syntax highlighting?
+        {{ form_widget(form.highlight, { attr: {'checked': 'checked' } }) }}
+      </p>
+
+      <p>
         Convert tabs to spaces?
         {{ form_widget(form.convertTabs, { attr: {'checked': 'checked' } }) }}
       </p>

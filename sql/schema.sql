@@ -5,6 +5,7 @@ CREATE TABLE pastes (
     filename VARCHAR(100),
     ip BLOB(16) NOT NULL,
     content_id INTEGER NOT NULL,
+    highlight BOOLEAN NOT NULL,
     FOREIGN KEY(content_id) REFERENCES paste_content(id)
 );
 
