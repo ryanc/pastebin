@@ -62,11 +62,15 @@ class Paste
 
     public function setConvertTabs($convert)
     {
+        if ($convert === null) { return; }
+
         $this->convertTabs = $convert;
     }
 
     public function setHighlight($highlight)
     {
+        if ($highlight === null) { return; }
+
         $this->highlight = (bool) $highlight;
     }
 
