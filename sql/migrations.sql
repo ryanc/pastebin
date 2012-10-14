@@ -1,4 +1,4 @@
--- Doctrine Migration File Generated on 2012-10-13 15:10:06
+-- Doctrine Migration File Generated on 2012-10-14 14:10:25
 -- Migrating from 0 to 20121013121601
 
 -- Version 20120820212620
@@ -19,5 +19,5 @@ INSERT INTO pastes SELECT * FROM pastes__tmp;
 DROP TABLE pastes__tmp;
 
 -- Version 20121013121601
-ALTER TABLE pastes ADD COLUMN highlight BOOLEAN;
+ALTER TABLE pastes ADD COLUMN highlight BOOLEAN DEFAULT 1;
 UPDATE pastes SET highlight = 1;
