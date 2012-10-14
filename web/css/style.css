@@ -242,3 +242,6 @@ button:active {
 span.group {
   margin-left: 15px;
 }
+label {
+  font-weight: bold;
+}
