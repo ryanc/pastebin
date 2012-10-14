@@ -12,20 +12,22 @@
   {{ form_widget(form._token) }}
 
   <div class="right">
-      <p>
-        Syntax highlighting?
+    <p>
+      <span class="group">
+        <label>Syntax highlighting?</label>
         {{ form_widget(form.highlight, { attr: {'checked': 'checked' } }) }}
-      </p>
+      </span>
 
-      <p>
-        Convert tabs to spaces?
+      <span class="group">
+        <label>Convert tabs to spaces?</label>
         {{ form_widget(form.convertTabs, { attr: {'checked': 'checked' } }) }}
-      </p>
+      </span>
+    </p>
 
-      <p>
-        {{ form_widget(form.filename, { attr: {'placeholder': 'Optional filename ...'} }) }}
-        <button class="button-main" id="submit" type="submit">Paste It</button>
-      </p>
+    <p>
+      {{ form_widget(form.filename, { attr: {'placeholder': 'Optional filename ...'} }) }}
+      <button class="button-main" id="submit" type="submit">Paste It</button>
+    </p>
   </div>
 
 </form>
