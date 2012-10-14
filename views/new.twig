@@ -14,12 +14,12 @@
   <div class="right">
     <p>
       <span class="group">
-        <label>Syntax highlighting?</label>
+        {{ form_label(form.highlight) }}
         {{ form_widget(form.highlight, { attr: {'checked': 'checked' } }) }}
       </span>
 
       <span class="group">
-        <label>Convert tabs to spaces?</label>
+        {{ form_label(form.convertTabs) }}
         {{ form_widget(form.convertTabs, { attr: {'checked': 'checked' } }) }}
       </span>
     </p>

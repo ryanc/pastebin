@@ -22,10 +22,12 @@ class Paste extends AbstractType
 
         $builder->add('convertTabs', 'checkbox', array(
             'required' => false,
+            'label'    => 'Convert tabs to spaces?',
         ));
 
         $builder->add('highlight', 'checkbox', array(
             'required' => false,
+            'label'    => 'Syntax highlighting?',
         ));
     }
 
