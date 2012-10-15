@@ -2,4 +2,4 @@
 
 shopt -s extglob
 
-rm -rf cache/{twig,fastcgi}/!(.gitkeep)
+rm -rfv cache/{twig,fastcgi}/!(.gitkeep)
