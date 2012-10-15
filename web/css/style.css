@@ -140,6 +140,9 @@ pre code {
   color: #fff;
 }
 #navigation li:last-child {
+  padding-right: 5px;
+}
+#navigation li:last-child {
   border-right: none;
 }
 #content {
