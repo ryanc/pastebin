@@ -1,0 +1,5 @@
+#!/bin/bash
+
+shopt -s extglob
+
+rm -rf cache/{twig,fastcgi}/!(.gitkeep)
