@@ -9,12 +9,12 @@ use Paste\Entity;
 
 $app->get('/', function () use ($app) {
     // Redirect to /p/new.
-    $subRequest = Request::create('/p/new', 'GET');
+    $subRequest = Request::create('/new', 'GET');
 
     return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
 });
 
-$app->get('/p/new', function () use ($app) {
+$app->get('/new', function () use ($app) {
 
     $form = $app['form.factory']->createBuilder(new Form\Paste);
     $form = $form->getForm();
@@ -28,7 +28,7 @@ $app->get('/p/new', function () use ($app) {
     ));
 });
 
-$app->post('/p/new', function (Request $request) use ($app) {
+$app->post('/new', function (Request $request) use ($app) {
 
     $form = $app['form.factory']->createBuilder(new Form\Paste);
     $form = $form->getForm();
@@ -57,7 +57,7 @@ $app->post('/p/new', function (Request $request) use ($app) {
     return $app['twig']->render('new.twig', array('form' => $form->createView()));
 });
 
-$app->get('/p/history', function () use ($app) {
+$app->get('/history', function () use ($app) {
     $recentPastes = $app['session']->get('recentPastes');
 
     $view = $app['twig']->render('history.twig', array(
@@ -67,9 +67,9 @@ $app->get('/p/history', function () use ($app) {
     return $view;
 });
 
-$app->get('/p/history/clear', function () use ($app) {
+$app->get('/history/clear', function () use ($app) {
     $app['session']->remove('recentPastes');
-    $subRequest = Request::create('/p/history', 'GET');
+    $subRequest = Request::create('/history', 'GET');
 
     return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
 });

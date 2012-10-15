@@ -33,7 +33,7 @@ class AppTest extends WebTestCase
     public function testNewPastePage()
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/p/new');
+        $crawler = $client->request('GET', '/new');
 
         $this->assertTrue($client->getResponse()->isOk());
         $this->assertCount(1, $crawler->filterXPath("//form"));
@@ -46,7 +46,7 @@ class AppTest extends WebTestCase
     public function testNewPaste()
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/p/new');
+        $crawler = $client->request('GET', '/new');
 
         $form = $crawler->selectButton('submit')->form();
         $crawler = $client->submit($form, array(
@@ -67,7 +67,7 @@ class AppTest extends WebTestCase
     public function testNewPasteWithNullContent()
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/p/new');
+        $crawler = $client->request('GET', '/new');
 
         $form = $crawler->selectButton('submit')->form();
         $crawler = $client->submit($form, array(
@@ -106,7 +106,7 @@ class AppTest extends WebTestCase
     public function testPasteHistory()
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/p/history');
+        $crawler = $client->request('GET', '/history');
 
         $this->assertTrue($client->getResponse()->isOk());
         $this->assertCount(1, $crawler->filterXPath("//h3"));
@@ -115,7 +115,7 @@ class AppTest extends WebTestCase
     public function testClearPasteHistory()
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/p/history/clear');
+        $crawler = $client->request('GET', '/history/clear');
 
         $this->assertTrue($client->getResponse()->isOk());
         $this->assertCount(1, $crawler->filterXPath("//h3"));
@@ -188,7 +188,7 @@ class AppTest extends WebTestCase
     public function testDuplicatePaste()
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/p/new');
+        $crawler = $client->request('GET', '/new');
 
         $form = $crawler->selectButton('submit')->form();
         $crawler = $client->submit($form, array(
@@ -233,7 +233,7 @@ class AppTest extends WebTestCase
     public function testPasteWithHighlighting()
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/p/new');
+        $crawler = $client->request('GET', '/new');
 
         $form = $crawler->selectButton('submit')->form();
         $crawler = $client->submit($form, array(
@@ -255,7 +255,7 @@ class AppTest extends WebTestCase
     public function testPasteWithoutHighlighting()
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/p/new');
+        $crawler = $client->request('GET', '/new');
 
         $form = $crawler->selectButton('submit')->form();
         $crawler = $client->submit($form, array(
@@ -277,7 +277,7 @@ class AppTest extends WebTestCase
     public function testGetLatestPaste()
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/p/new');
+        $crawler = $client->request('GET', '/new');
 
         $form = $crawler->selectButton('submit')->form();
         $crawler = $client->submit($form, array(

@@ -4,7 +4,7 @@
 <h3>Your Recent Pastes</h3>
 
 {% if not history  %}
-  <p>You have not created any pastes yet. <a href="/p/new">Create one now</a></p>
+  <p>You have not created any pastes yet. <a href="/new">Create one now</a></p>
 {% else %}
 <ul>
   {% for paste in history %}
@@ -12,7 +12,7 @@
   {% endfor %}
 </ul>
 <p>
-  <a href="/p/history/clear">Clear</a>
+  <a href="/history/clear">Clear</a>
 </p>
 {% endif %}
 
