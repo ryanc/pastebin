@@ -273,4 +273,22 @@ class AppTest extends WebTestCase
         $this->assertCount(1, $crawler->filterXPath("//code[contains(@class, 'no-highlight')]"));
         $this->assertEquals('Hello :)', $crawler->filterXPath("//code")->text());
     }
+
+    public function testGetLatestPaste()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/p/new');
+
+        $form = $crawler->selectButton('submit')->form();
+        $crawler = $client->submit($form, array(
+            'paste[content]'     => 'Hello :)',
+            'paste[filename]'    => 'test.txt',
+            'paste[convertTabs]' => '1',
+            'paste[highlight]'   => '1',
+        ));
+
+        $crawler = $client->request('GET', '/latest');
+
+        $this->assertTrue($client->getResponse()->isRedirect('/p/1'));
+    }
 }

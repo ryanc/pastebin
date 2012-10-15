@@ -59,4 +59,18 @@ class StorageTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($paste);
     }
+
+    public function testGetLatest()
+    {
+        $paste = new Entity\Paste;
+        $paste->setContent('This is a test.');
+        $paste->setTimestamp(new \DateTime);
+        $paste->setFilename('test.txt');
+        $paste->setIp('127.0.0.1');
+
+        $storage = $this->app['storage'];
+        $id = $storage->save($paste);
+
+        $this->assertEquals($id, $storage->getLatest());
+    }
 }

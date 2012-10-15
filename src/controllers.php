@@ -133,11 +133,18 @@ $app->get('/p/{id}/clone', function ($id) use ($app) {
 })
 ->assert('id', '\w+');
 
+$app->get('/latest', function () use ($app) {
+    $id = $app['storage']->getLatest();
+
+    return new RedirectResponse('/p/' . $id);
+});
+
 $app->post('/api', function (Request $request) use ($app) {
     $paste = new Entity\Paste();
     $paste->setIp($request->getClientIp());
     $paste->setContent($request->request->get('content'));
     $paste->setFilename($request->request->get('filename'));
+    $paste->setHighlight($request->request->get('highlight'));
 
     $errors = $app['validator']->validate($paste);
 

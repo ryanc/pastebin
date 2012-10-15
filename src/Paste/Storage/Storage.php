@@ -148,6 +148,19 @@ class Storage
     }
 
     /**
+     * Get the ID of the most recent paste.
+     *
+     * @return integer
+     *  ID of the most recent paste.
+     */
+    public function getLatest()
+    {
+        $sql = 'SELECT id FROM pastes ORDER BY id DESC LIMIT 1';
+
+        return $this->db->fetchColumn($sql);
+    }
+
+    /**
      * @codeCoverageIgnore
      */
     protected function close()
