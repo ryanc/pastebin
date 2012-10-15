@@ -5,3 +5,4 @@ composer.phar*
 backups/*
 logs/*
 .DS_Store
+.vagrant
