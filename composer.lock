@@ -156,7 +156,6 @@
             "suggest": {
                 "symfony/yaml": "2.1.*"
             },
-            "time": "1346280316",
             "type": "library",
             "extra": {
                 "branch-alias": [
@@ -186,7 +185,8 @@
             "description": "A JSON/Yaml-based config ServiceProvider for Silex.",
             "keywords": [
                 "silex"
-            ]
+            ],
+            "time": "1346280316"
         },
         {
             "name": "monolog/monolog",
@@ -296,12 +296,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Silex.git",
-                "reference": "fc82b4255ef081dd7d464c5320ca93a902f9190f"
+                "reference": "ffb53a4979b731d08dde6c7b455a9374a9ddd804"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Silex/zipball/fc82b4255ef081dd7d464c5320ca93a902f9190f",
-                "reference": "fc82b4255ef081dd7d464c5320ca93a902f9190f",
+                "url": "https://github.com/fabpot/Silex/zipball/ffb53a4979b731d08dde6c7b455a9374a9ddd804",
+                "reference": "ffb53a4979b731d08dde6c7b455a9374a9ddd804",
                 "shasum": ""
             },
             "require": {
@@ -335,7 +335,7 @@
                 "symfony/css-selector": "2.1.*",
                 "symfony/dom-crawler": "2.1.*"
             },
-            "time": "1349013590",
+            "time": "1350048193",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1027,22 +1027,22 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.10.0",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Twig.git",
-                "reference": "v1.10.0"
+                "reference": "v1.10.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Twig/zipball/v1.10.0",
-                "reference": "v1.10.0",
+                "url": "https://github.com/fabpot/Twig/zipball/v1.10.2",
+                "reference": "v1.10.2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "2012-09-28 20:11:39",
+            "time": "2012-10-15 01:23:34",
             "type": "library",
             "extra": {
                 "branch-alias": {
