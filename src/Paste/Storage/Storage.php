@@ -26,6 +26,8 @@ class Storage
              . "FROM pastes p, paste_content c "
              . "WHERE p.content_id = c.id AND p.token = :token";
 
+        $this->logger->addDebug($sql);
+
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':token', $id);
         $stmt->execute();
@@ -70,6 +72,8 @@ class Storage
             $sql = 'INSERT INTO paste_content (content, digest) '
                  . 'VALUES (:content, :digest)';
 
+            $this->logger->addDebug($sql);
+
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(':content', $paste->getContent());
             $stmt->bindValue(':digest', $paste->getDigest()); 
@@ -79,6 +83,8 @@ class Storage
 
         $sql = 'INSERT INTO pastes (filename, ip, content_id, highlight) '
              . 'VALUES (:filename, :ip, :content_id, :highlight)';
+
+        $this->logger->addDebug($sql);
 
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':filename', $filename);
@@ -94,6 +100,8 @@ class Storage
 
         $sql = 'UPDATE pastes '
              . 'SET token = :token WHERE id = :id';
+
+        $this->logger->addDebug($sql);
 
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':token', $token);
@@ -130,6 +138,8 @@ class Storage
     {
         $sql = 'SELECT id FROM paste_content WHERE digest = :digest';
 
+        $this->logger->addDebug($sql);
+
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':digest', $digest);
         $stmt->execute();
@@ -156,6 +166,8 @@ class Storage
     public function getLatest()
     {
         $sql = 'SELECT token FROM pastes ORDER BY id DESC LIMIT 1';
+
+        $this->logger->addDebug($sql);
 
         return $this->db->fetchColumn($sql);
     }
