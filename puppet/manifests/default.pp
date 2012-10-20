@@ -71,6 +71,12 @@ file {
         require => Package["php5-fpm"],
     ;
 
+    "/etc/php5/fpm/pool.d/www.conf":
+      source  => "/vagrant/puppet/files/etc/php5/fpm/pool.d/www.conf",
+      notify  => Service["php5-fpm"],
+      require => Package["php5-fpm"],
+    ;
+
     "/etc/localtime":
         source => "/usr/share/zoneinfo/America/Chicago",
     ;
