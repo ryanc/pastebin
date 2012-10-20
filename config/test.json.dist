@@ -14,6 +14,7 @@
     "monolog.logfile": "php://memory",
 
     "pastebin.schema": "%pwd%/sql/schema.sql",
+    "pastebin.title": "Mmm Paste",
 
     "session.test": true
 }

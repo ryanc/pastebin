@@ -11,5 +11,7 @@
         "cache": "%pwd%/cache/twig"
     },
 
+    "pastebin.title": "Mmm Paste",
+
     "monolog.logfile": "%pwd%/logs/pastebin.log"
 }

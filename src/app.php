@@ -36,6 +36,8 @@ $app->register(new Igorw\Silex\ConfigServiceProvider(
     __DIR__ . "/../config/$env.json", $configReplacements
 ));
 
+$app['twig']->addGlobal('title', $app['pastebin.title']);
+
 $app->error(function (\Exception $ex, $code) use ($app) {
     if ($code !== 404) {
         return;

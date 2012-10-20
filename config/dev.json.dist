@@ -12,5 +12,7 @@
         "debug": true
     },
 
+    "pastebin.title": "Mmm Paste",
+
     "monolog.logfile": "%pwd%/logs/pastebin.log"
 }
