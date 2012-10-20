@@ -112,6 +112,21 @@ class AppTest extends WebTestCase
         $this->assertCount(1, $crawler->filterXPath("//h3"));
     }
 
+    public function testAbout()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/about');
+
+        $response = $client->getResponse();
+
+        $this->assertTrue($response->isOk());
+        $this->assertCount(1, $crawler->filterXPath("//h3"));
+        $this->assertContains('http://cavi.cc', $response->getContent());
+        $this->assertContains('http://github.com/ryanc/pastebin', $response->getContent());
+        $this->assertContains('Ryan Cavicchioni', $response->getContent());
+        $this->assertTrue($response->headers->contains('Cache-Control', 's-maxage=31536000'));
+    }
+
     public function testClearPasteHistory()
     {
         $client = $this->createClient();

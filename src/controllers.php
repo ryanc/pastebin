@@ -171,3 +171,11 @@ $app->post('/api', function (Request $request) use ($app) {
         'Content-Type' => 'application/json',
     ));
 });
+
+$app->get('/about', function () use ($app) {
+    $view = $app['twig']->render('about.twig');
+
+    return new Response($view, 200, array(
+        'Cache-Control' => 's-maxage=31536000',
+    ));
+});
