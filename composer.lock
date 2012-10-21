@@ -296,46 +296,46 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Silex.git",
-                "reference": "ffb53a4979b731d08dde6c7b455a9374a9ddd804"
+                "reference": "3b9351fff370831cd66d1e5d3d8a288730939f67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Silex/zipball/ffb53a4979b731d08dde6c7b455a9374a9ddd804",
-                "reference": "ffb53a4979b731d08dde6c7b455a9374a9ddd804",
+                "url": "https://github.com/fabpot/Silex/zipball/3b9351fff370831cd66d1e5d3d8a288730939f67",
+                "reference": "3b9351fff370831cd66d1e5d3d8a288730939f67",
                 "shasum": ""
             },
             "require": {
-                "symfony/event-dispatcher": "2.1.*",
-                "symfony/http-foundation": "2.1.*",
-                "symfony/http-kernel": "2.1.*",
-                "symfony/routing": "2.1.*",
                 "php": ">=5.3.3",
-                "pimple/pimple": "1.*"
+                "pimple/pimple": "1.*",
+                "symfony/event-dispatcher": ">=2.1,<2.3-dev",
+                "symfony/http-foundation": ">=2.1,<2.3-dev",
+                "symfony/http-kernel": ">=2.1,<2.3-dev",
+                "symfony/routing": ">=2.1,<2.3-dev"
             },
             "require-dev": {
-                "symfony/form": "2.1.*",
-                "symfony/translation": "2.1.*",
-                "symfony/twig-bridge": "2.1.*",
-                "symfony/validator": "2.1.*",
-                "symfony/monolog-bridge": "2.1.*",
-                "symfony/browser-kit": "2.1.*",
-                "symfony/css-selector": "2.1.*",
-                "symfony/finder": "2.1.*",
-                "symfony/process": "2.1.*",
-                "symfony/security": "2.1.*",
                 "monolog/monolog": ">=1.0.0,<1.2-dev",
-                "symfony/config": "2.1.*",
-                "symfony/locale": "2.1.*",
                 "twig/twig": ">=1.8.0,<2.0-dev",
                 "swiftmailer/swiftmailer": "4.2.*",
-                "doctrine/dbal": ">=2.2.0,<2.4.0-dev"
+                "doctrine/dbal": ">=2.2.0,<2.4.0-dev",
+                "symfony/security": ">=2.1,<2.3-dev",
+                "symfony/config": ">=2.1,<2.3-dev",
+                "symfony/locale": ">=2.1,<2.3-dev",
+                "symfony/form": ">=2.1,<2.3-dev",
+                "symfony/browser-kit": ">=2.1,<2.3-dev",
+                "symfony/css-selector": ">=2.1,<2.3-dev",
+                "symfony/finder": ">=2.1,<2.3-dev",
+                "symfony/monolog-bridge": ">=2.1,<2.3-dev",
+                "symfony/process": ">=2.1,<2.3-dev",
+                "symfony/translation": ">=2.1,<2.3-dev",
+                "symfony/twig-bridge": ">=2.1,<2.3-dev",
+                "symfony/validator": ">=2.1,<2.3-dev"
             },
             "suggest": {
-                "symfony/browser-kit": "2.1.*",
-                "symfony/css-selector": "2.1.*",
-                "symfony/dom-crawler": "2.1.*"
+                "symfony/browser-kit": ">=2.1,<2.3-dev",
+                "symfony/css-selector": ">=2.1,<2.3-dev",
+                "symfony/dom-crawler": ">=2.1,<2.3-dev"
             },
-            "time": "1350048193",
+            "time": "1350048840",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1027,22 +1027,22 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.10.2",
+            "version": "v1.10.3",
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Twig.git",
-                "reference": "v1.10.2"
+                "reference": "v1.10.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Twig/zipball/v1.10.2",
-                "reference": "v1.10.2",
+                "url": "https://github.com/fabpot/Twig/zipball/v1.10.3",
+                "reference": "v1.10.3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "2012-10-15 01:23:34",
+            "time": "2012-10-19 03:45:49",
             "type": "library",
             "extra": {
                 "branch-alias": {
