@@ -144,10 +144,9 @@ class AppTest extends WebTestCase
             'filename' => 'test.txt',
         ));
 
-        $this->assertTrue($client->getResponse()->isOk());
-
-        $content = json_decode($client->getResponse()->getContent(), true);
-        $this->assertTrue($content['success']);
+        $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertEquals(201, $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->headers->has('Location'));
     }
 
     public function testApiFailure()
@@ -238,7 +237,7 @@ class AppTest extends WebTestCase
             'content' => 'Hello :)',
         ));
 
-        $this->assertTrue($client->getResponse()->isOk());
+        $this->assertTrue($client->getResponse()->isRedirect());
 
         $crawler = $client->request('GET', '/p/1/download');
 

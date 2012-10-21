@@ -161,15 +161,14 @@ $app->post('/api', function (Request $request) use ($app) {
 
     $id = $app['storage']->save($paste);
 
-    $json = json_encode(array(
-        'success' => true,
-        'url'     => 'http://' . $request->getHttpHost() . '/p/' . $id,
-    ));
-    $json = str_replace('\/', '/', $json);
+    $url = 'http://' . $request->getHttpHost() . '/p/' . $id;
 
-    return new Response($json, 200, array(
-        'Content-Type' => 'application/json',
-    ));
+    $response = new Response;
+    $response->setStatusCode(201);
+    $response->headers->set('Location', $url);
+
+    return $response;
+
 });
 
 $app->get('/about', function () use ($app) {
