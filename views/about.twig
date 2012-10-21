@@ -1,11 +1,27 @@
 {% extends "layout.twig" %}
 
+{% block css %}
+{{ parent() }}
+<link type="text/css" rel="stylesheet" href="/css/themes/ir_black.css" class="theme">
+<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Code+Pro">
+{% endblock %}
+
+{% block javascript %}
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{% endblock %}
+
 {% block content %}
 
 <h3>About</h3>
 <p>
 This pastebin was written by <a href="http://cavi.cc">Ryan Cavicchioni</a> and
 is <a href="http://github.com/ryanc/pastebin">open source</a>.
+</p>
+
+<p>
+There is a simple REST API for creating pastes, here is a
+<a href="http://p.confabulator.net/p/2H">sample script</a>.
 </p>
 
 {% endblock %}
