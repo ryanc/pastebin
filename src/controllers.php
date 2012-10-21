@@ -161,7 +161,7 @@ $app->post('/api', function (Request $request) use ($app) {
 
     $id = $app['storage']->save($paste);
 
-    $url = 'http://' . $request->getHttpHost() . '/p/' . $id;
+    $url = $request->getSchemeAndHttpHost() . '/p/' . $id;
 
     $response = new Response;
     $response->setStatusCode(201);
