@@ -15,6 +15,7 @@
 
     "pastebin.schema": "%pwd%/sql/schema.sql",
     "pastebin.title": "Mmm Paste",
+    "pastebin.theme": "pojoaque",
 
     "session.test": true
 }

@@ -37,6 +37,7 @@ $app->register(new Igorw\Silex\ConfigServiceProvider(
 ));
 
 $app['twig']->addGlobal('title', $app['pastebin.title']);
+$app['twig']->addGlobal('theme', $app['pastebin.theme']);
 
 $app->error(function (\Exception $ex, $code) use ($app) {
     if ($code !== 404) {

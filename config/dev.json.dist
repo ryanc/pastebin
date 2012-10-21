@@ -13,6 +13,7 @@
     },
 
     "pastebin.title": "Mmm Paste",
+    "pastebin.theme": "pojoaque",
 
     "monolog.logfile": "%pwd%/logs/pastebin.log"
 }
