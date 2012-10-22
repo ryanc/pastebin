@@ -72,7 +72,7 @@ class AppTest extends WebTestCase
 
         $this->assertTrue($client->getResponse()->isRedirect('/p/1'));
 
-        $crawler = $client->request('GET', '/p/1');
+        $crawler = $client->followRedirect();
 
         $this->assertCount(1, $crawler->filterXPath("//code"));
         $this->assertEquals('Hello :)', $crawler->filterXPath("//code")->text());
@@ -270,7 +270,7 @@ class AppTest extends WebTestCase
 
         $this->assertTrue($client->getResponse()->isRedirect('/p/1'));
 
-        $crawler = $client->request('GET', '/p/1');
+        $crawler = $client->followRedirect();
 
         $this->assertCount(1, $crawler->filterXPath("//code"));
         $this->assertEquals('Hello :)', $crawler->filterXPath("//code")->text());
@@ -348,7 +348,7 @@ class AppTest extends WebTestCase
 
         $this->assertTrue($client->getResponse()->isRedirect('/p/1'));
 
-        $crawler = $client->request('GET', '/p/1');
+        $crawler = $client->followRedirect();
 
         $this->assertCount(1, $crawler->filterXPath("//code"));
         $this->assertCount(0, $crawler->filterXPath("//code[contains(@class, 'no-highlight')]"));
@@ -385,7 +385,7 @@ class AppTest extends WebTestCase
 
         $this->assertTrue($client->getResponse()->isRedirect('/p/1'));
 
-        $crawler = $client->request('GET', '/p/1');
+        $crawler = $client->followRedirect();
 
         $this->assertCount(1, $crawler->filterXPath("//code"));
         $this->assertCount(1, $crawler->filterXPath("//code[contains(@class, 'no-highlight')]"));
