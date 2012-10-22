@@ -2,6 +2,7 @@
 
 namespace Paste\Tests;
 
+use Paste\Entity\Paste;
 use Silex\WebTestCase;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
@@ -13,7 +14,7 @@ class AppTest extends WebTestCase
         $app['debug'] = true;
         unset($app['exception_handler']);
 
-        $app['db']->exec(file_get_contents($app['pastebin.schema']));
+        $app['storage'] = $this->getStorage();
 
         /* Import the controllers or else none of the routes will be 
            found. */
@@ -45,6 +46,19 @@ class AppTest extends WebTestCase
 
     public function testNewPaste()
     {
+        $this->app['storage']
+            ->expects($this->once())
+            ->method('save')
+            ->with($this->isType('object'))
+            ->will($this->returnValue('1'))
+        ;
+        $this->app['storage']
+            ->expects($this->once())
+            ->method('get')
+            ->with($this->isType('string'))
+            ->will($this->returnValue($this->getPaste()))
+        ;
+
         $client = $this->createClient();
         $crawler = $client->request('GET', '/new');
 
@@ -138,6 +152,13 @@ class AppTest extends WebTestCase
 
     public function testApiSuccess()
     {
+        $this->app['storage']
+            ->expects($this->once())
+            ->method('save')
+            ->with($this->isType('object'))
+            ->will($this->returnValue('1'))
+        ;
+
         $client = $this->createClient();
         $crawler = $client->request('POST', '/api', array(
             'content'  => 'Hello :)',
@@ -147,6 +168,7 @@ class AppTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isSuccessful());
         $this->assertEquals(201, $client->getResponse()->getStatusCode());
         $this->assertTrue($client->getResponse()->headers->has('Location'));
+        $this->assertEquals('http://localhost/p/1', $client->getResponse()->headers->get('Location'));
     }
 
     public function testApiFailure()
@@ -165,6 +187,13 @@ class AppTest extends WebTestCase
 
     public function testGetPaste()
     {
+        $this->app['storage']
+            ->expects($this->once())
+            ->method('get')
+            ->with($this->isType('string'))
+            ->will($this->returnValue($this->getPaste()))
+        ;
+
         $client = $this->createClient();
         $crawler = $client->request('POST', '/api', array(
             'content' => 'Hello :)',
@@ -179,6 +208,13 @@ class AppTest extends WebTestCase
 
     public function testPasteNotFound()
     {
+        $this->app['storage']
+            ->expects($this->once())
+            ->method('get')
+            ->with($this->isType('string'))
+            ->will($this->returnValue(false))
+        ;
+
         $client = $this->createClient();
         $crawler = $client->request('GET', '/p/1');
 
@@ -188,6 +224,13 @@ class AppTest extends WebTestCase
 
     public function testGetRawPaste()
     {
+        $this->app['storage']
+            ->expects($this->once())
+            ->method('get')
+            ->with($this->isType('string'))
+            ->will($this->returnValue($this->getPaste()))
+        ;
+
         $client = $this->createClient();
         $crawler = $client->request('POST', '/api', array(
             'content' => 'Hello :)',
@@ -201,6 +244,19 @@ class AppTest extends WebTestCase
 
     public function testDuplicatePaste()
     {
+        $this->app['storage']
+            ->expects($this->any())
+            ->method('save')
+            ->with($this->isType('object'))
+            ->will($this->returnValue('1'))
+        ;
+        $this->app['storage']
+            ->expects($this->any())
+            ->method('get')
+            ->with($this->isType('string'))
+            ->will($this->returnValue($this->getPaste()))
+        ;
+
         $client = $this->createClient();
         $crawler = $client->request('GET', '/new');
 
@@ -224,7 +280,20 @@ class AppTest extends WebTestCase
         $form = $crawler->selectButton('submit')->form();
         $crawler = $client->submit($form);
 
-        $crawler = $client->request('GET', '/p/1');
+        $this->app['storage']
+            ->expects($this->any())
+            ->method('save')
+            ->with($this->isType('object'))
+            ->will($this->returnValue('2'))
+        ;
+        $this->app['storage']
+            ->expects($this->any())
+            ->method('get')
+            ->with($this->isType('string'))
+            ->will($this->returnValue($this->getPaste()))
+        ;
+
+        $crawler = $client->request('GET', '/p/2');
 
         $this->assertCount(1, $crawler->filterXPath("//code"));
         $this->assertEquals('Hello :)', $crawler->filterXPath("//code")->text());
@@ -232,6 +301,13 @@ class AppTest extends WebTestCase
 
     public function testDownloadPaste()
     {
+        $this->app['storage']
+            ->expects($this->once())
+            ->method('get')
+            ->with($this->isType('string'))
+            ->will($this->returnValue($this->getPaste()))
+        ;
+
         $client = $this->createClient();
         $crawler = $client->request('POST', '/api', array(
             'content' => 'Hello :)',
@@ -246,6 +322,19 @@ class AppTest extends WebTestCase
 
     public function testPasteWithHighlighting()
     {
+        $this->app['storage']
+            ->expects($this->once())
+            ->method('save')
+            ->with($this->isType('object'))
+            ->will($this->returnValue('1'))
+        ;
+        $this->app['storage']
+            ->expects($this->once())
+            ->method('get')
+            ->with($this->isType('string'))
+            ->will($this->returnValue($this->getPaste()))
+        ;
+
         $client = $this->createClient();
         $crawler = $client->request('GET', '/new');
 
@@ -268,6 +357,21 @@ class AppTest extends WebTestCase
 
     public function testPasteWithoutHighlighting()
     {
+        $paste = $this->getPaste()->setHighlight(false);
+
+        $this->app['storage']
+            ->expects($this->once())
+            ->method('save')
+            ->with($this->isType('object'))
+            ->will($this->returnValue('1'))
+        ;
+        $this->app['storage']
+            ->expects($this->once())
+            ->method('get')
+            ->with($this->isType('string'))
+            ->will($this->returnValue($paste))
+        ;
+
         $client = $this->createClient();
         $crawler = $client->request('GET', '/new');
 
@@ -290,6 +394,24 @@ class AppTest extends WebTestCase
 
     public function testGetLatestPaste()
     {
+        $this->app['storage']
+            ->expects($this->once())
+            ->method('save')
+            ->with($this->isType('object'))
+            ->will($this->returnValue('1'))
+        ;
+        $this->app['storage']
+            ->expects($this->any())
+            ->method('get')
+            ->with($this->isType('string'))
+            ->will($this->returnValue($this->getPaste()))
+        ;
+        $this->app['storage']
+            ->expects($this->once())
+            ->method('getLatest')
+            ->will($this->returnValue('1'))
+        ;
+
         $client = $this->createClient();
         $crawler = $client->request('GET', '/new');
 
@@ -304,5 +426,35 @@ class AppTest extends WebTestCase
         $crawler = $client->request('GET', '/latest');
 
         $this->assertTrue($client->getResponse()->isRedirect('/p/1'));
+    }
+
+    private function getStorage()
+    {
+        $storage = $this->getMockBuilder('Paste\Storage\Storage')
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+
+        return $storage;
+    }
+
+    private function getPaste()
+    {
+        $now = new \DateTime;
+
+        $paste = new Paste;
+        $paste
+            ->setId(1)
+            ->setContent('Hello :)')
+            ->setTimestamp($now)
+            ->setToken('1')
+            ->setFilename('test.txt')
+            ->setIp('127.0.0.1')
+            ->setBinaryIp(inet_pton('127.0.0.1'))
+            ->setConvertTabs(true)
+            ->setHighlight(true)
+        ;
+
+        return $paste;
     }
 }
