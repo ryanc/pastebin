@@ -1,10 +1,10 @@
 <?php
 
-namespace Paste\Tests;
+namespace Pastebin\Tests;
 
 use Paste\Entity\Paste;
 
-class PasteTest extends \PHPUnit_Framework_TestCase
+class EntityTest extends \PHPUnit_Framework_TestCase
 {
     public function testId()
     {

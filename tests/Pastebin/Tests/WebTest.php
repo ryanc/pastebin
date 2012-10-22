@@ -1,16 +1,16 @@
 <?php
 
-namespace Paste\Tests;
+namespace Pastebin\Tests;
 
 use Paste\Entity\Paste;
 use Silex\WebTestCase;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
-class AppTest extends WebTestCase
+class WebTest extends WebTestCase
 {
     public function createApplication()
     {
-        $app = require __DIR__ . '/../src/app.php';
+        $app = require __DIR__ . '/../../../src/app.php';
         $app['debug'] = true;
         unset($app['exception_handler']);
 
@@ -18,7 +18,7 @@ class AppTest extends WebTestCase
 
         /* Import the controllers or else none of the routes will be 
            found. */
-        require __DIR__ . '/../src/controllers.php';
+        require __DIR__ . '/../../../src/controllers.php';
 
         return $app;
     }

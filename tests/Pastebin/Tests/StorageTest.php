@@ -1,6 +1,6 @@
 <?php
 
-namespace Paste\Tests;
+namespace Pastebin\Tests;
 
 use Paste\Entity;
 use Paste\Storage;
@@ -15,7 +15,7 @@ class StorageTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $app = require __DIR__ . '/../src/app.php';
+        $app = require __DIR__ . '/../../../src/app.php';
 
         $this->app = $app;
 

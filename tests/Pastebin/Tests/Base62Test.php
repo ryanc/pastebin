@@ -1,6 +1,6 @@
 <?php
 
-namespace Paste\Tests;
+namespace Pastebin\Tests;
 
 use Paste\Math\Base62;
 
