@@ -5,6 +5,8 @@ server {
     # See caveats: http://vagrantup.com/v1/docs/config/vm/share_folder.html
     sendfile off;
 
+    client_max_body_size 50m;
+
     #listen   80; ## listen for ipv4; this line is default and implied
     #listen   [::]:80 default ipv6only=on; ## listen for ipv6
 
