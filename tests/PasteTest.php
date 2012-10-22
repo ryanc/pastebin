@@ -154,6 +154,7 @@ class PasteTest extends \PHPUnit_Framework_TestCase
             ->setHighlight(true)
         ;
 
+        $this->assertInstanceOf('Paste\Entity\Paste', $paste);
         $this->assertEquals(1, $paste->getId());
         $this->assertEquals('Hello :)', $paste->getContent());
         $this->assertEquals($now, $paste->getTimestamp());
