@@ -26,6 +26,8 @@ class Paste
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
     }
 
     public function setContent($content)
@@ -33,45 +35,61 @@ class Paste
         $this->content = $this->normalizeContent(
             $this->trimContent($content)
         );
+
+        return $this;
     }
 
     public function setTimestamp(\DateTime $timestamp)
     {
         $this->timestamp = $timestamp;
+
+        return $this;
     }
 
     public function setToken($token)
     {
         $this->token = $token;
+
+        return $this;
     }
 
     public function setFilename($filename)
     {
         $this->filename = $filename;
+
+        return $this;
     }
 
     public function setIp($ip)
     {
         $this->ip = $ip;
+
+        return $this;
     }
 
     public function setBinaryIp($ip)
     {
         $this->ip = inet_ntop($ip);
+
+        return $this;
     }
 
     public function setConvertTabs($convert)
     {
-        if ($convert === null) { return; }
+        if ($convert === null) { return $this; }
 
         $this->convertTabs = (bool) $convert;
+
+        return $this;
     }
 
     public function setHighlight($highlight)
     {
-        if ($highlight === null) { return; }
+        if ($highlight === null) { return $this; }
 
         $this->highlight = (bool) $highlight;
+
+        return $this;
     }
 
     public function getId()

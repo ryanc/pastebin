@@ -136,4 +136,32 @@ class PasteTest extends \PHPUnit_Framework_TestCase
         $paste->setConvertTabs(false);
         $this->assertEquals("Hello :)\tHello :)", $paste->getContent());
     }
+
+    public function testFluentInterface()
+    {
+        $now = new \DateTime;
+
+        $paste = new Paste;
+        $paste
+            ->setId(1)
+            ->setContent('Hello :)')
+            ->setTimestamp($now)
+            ->setToken('1')
+            ->setFilename('test.txt')
+            ->setIp('127.0.0.1')
+            ->setBinaryIp(inet_pton('127.0.0.1'))
+            ->setConvertTabs(true)
+            ->setHighlight(true)
+        ;
+
+        $this->assertEquals(1, $paste->getId());
+        $this->assertEquals('Hello :)', $paste->getContent());
+        $this->assertEquals($now, $paste->getTimestamp());
+        $this->assertEquals('1', $paste->getToken());
+        $this->assertEquals('test.txt', $paste->getFilename());
+        $this->assertEquals('127.0.0.1', $paste->getIp());
+        $this->assertEquals(inet_pton('127.0.0.1'), $paste->getBinaryIp());
+        $this->assertTrue($paste->getConvertTabs());
+        $this->assertTrue($paste->getHighlight());
+    }
 }
