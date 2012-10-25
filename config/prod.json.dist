@@ -13,6 +13,7 @@
 
     "pastebin.title": "Mmm Paste",
     "pastebin.theme": "pojoaque",
+    "pastebin.cache.maxage": 31536000,
 
     "monolog.logfile": "%pwd%/logs/pastebin.log"
 }

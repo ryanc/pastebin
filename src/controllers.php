@@ -24,7 +24,7 @@ $app->get('/new', function () use ($app) {
     ));
 
     return new Response($view, 200, array(
-        'Cache-Control' => 's-maxage=300',
+        'Cache-Control' => 's-maxage=0',
     ));
 });
 
@@ -89,7 +89,7 @@ $app->get('/p/{id}', function ($id) use ($app) {
     ));
     
     return new Response($view, 200, array(
-        'Cache-Control' => 's-maxage=300',
+        'Cache-Control' => 's-maxage=' . $app['pastebin.cache.maxage'],
     ));
 })
 ->assert('id', '\w+');
@@ -98,7 +98,7 @@ $app->get('/p/{id}/raw/{filename}', function ($id, $filename) use ($app) {
     $paste = $app['storage']->get($id);
 
     return new Response($paste->getContent(), 200, array(
-        'Cache-Control' => 's-maxage=300',
+        'Cache-Control' => 's-maxage=' . $app['pastebin.cache.maxage'],
         'Content-Type'  => 'text/plain',
     ));
 })
@@ -113,7 +113,7 @@ $app->get('/p/{id}/download', function ($id) use ($app) {
     }
 
     return new Response($paste->getContent(), 200, array(
-        'Cache-Control' => 's-maxage=300',
+        'Cache-Control' => 's-maxage=' . $app['pastebin.cache.maxage'],
         'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
     ));
 })
@@ -175,6 +175,6 @@ $app->get('/about', function () use ($app) {
     $view = $app['twig']->render('about.twig');
 
     return new Response($view, 200, array(
-        'Cache-Control' => 's-maxage=31536000',
+        'Cache-Control' => 's-maxage=' . $app['pastebin.cache.maxage'],
     ));
 });
