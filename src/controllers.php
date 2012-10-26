@@ -19,7 +19,7 @@ $app->get('/new', function () use ($app) {
     $form = $app['form.factory']->createBuilder(new Form\Paste);
     $form = $form->getForm();
 
-    $view = $app['twig']->render('new.twig', array(
+    $view = $app['twig']->render('new.html', array(
         'form' => $form->createView()
     ));
 
@@ -54,13 +54,13 @@ $app->post('/new', function (Request $request) use ($app) {
         return new RedirectResponse('/p/' . $id);
     }
 
-    return $app['twig']->render('new.twig', array('form' => $form->createView()));
+    return $app['twig']->render('new.html', array('form' => $form->createView()));
 });
 
 $app->get('/history', function () use ($app) {
     $recentPastes = $app['session']->get('recentPastes');
 
-    $view = $app['twig']->render('history.twig', array(
+    $view = $app['twig']->render('history.html', array(
         'history' => $recentPastes,
     ));
 
@@ -83,10 +83,10 @@ $app->get('/p/{id}', function ($id) use ($app) {
     }
     // @codeCoverageIgnoreEnd
 
-    $view = $app['twig']->render('paste.twig', array(
         'paste' => $paste,
         'id' => $id,
     ));
+    $view = $app['twig']->render('paste.html', $viewBag);
     
     return new Response($view, 200, array(
         'Cache-Control' => 's-maxage=' . $app['pastebin.cache.maxage'],
@@ -125,7 +125,7 @@ $app->get('/p/{id}/clone', function ($id) use ($app) {
     $form = $app['form.factory']->createBuilder(new Form\Paste, $paste);
     $form = $form->getForm();
 
-    $view = $app['twig']->render('new.twig', array(
+    $view = $app['twig']->render('new.html', array(
         'form' => $form->createView(),
     ));
 
@@ -172,7 +172,7 @@ $app->post('/api', function (Request $request) use ($app) {
 });
 
 $app->get('/about', function () use ($app) {
-    $view = $app['twig']->render('about.twig');
+    $view = $app['twig']->render('about.html');
 
     return new Response($view, 200, array(
         'Cache-Control' => 's-maxage=' . $app['pastebin.cache.maxage'],

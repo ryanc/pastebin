@@ -44,7 +44,7 @@ $app->error(function (\Exception $ex, $code) use ($app) {
         return;
     }
 
-    $view = $app['twig']->render('error.twig', array(
+    $view = $app['twig']->render('error.html', array(
         'error' => $ex->getMessage(),
     ));
 
