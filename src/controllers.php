@@ -83,10 +83,10 @@ $app->get('/p/{id}', function ($id) use ($app) {
     }
     // @codeCoverageIgnoreEnd
 
+    $view = $app['twig']->render('paste.html', array(
         'paste' => $paste,
         'id' => $id,
     ));
-    $view = $app['twig']->render('paste.html', $viewBag);
     
     return new Response($view, 200, array(
         'Cache-Control' => 's-maxage=' . $app['pastebin.cache.maxage'],
